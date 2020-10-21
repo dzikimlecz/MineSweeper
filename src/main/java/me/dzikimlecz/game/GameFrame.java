@@ -1,24 +1,25 @@
 package me.dzikimlecz.game;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 import java.util.List;
-import java.util.Random;
 
 public class GameFrame extends JFrame {
 	private final GamePanel[][] segmentPanels;
-	Dimension frameSize;
+	private final Difficulty difficulty;
+	private final Dimension frameSize;
 	
 	public GameFrame(Difficulty difficulty) {
 		// FIXME: 20.10.2020 anomalies on non-extreme difficulties.
 		super("MineSweeper");
+		this.difficulty = difficulty;
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(987, 700);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
-		
 		JPanel mainPanel = new JPanel();
 		
 		frameSize = new Dimension();
@@ -44,7 +45,7 @@ public class GameFrame extends JFrame {
 				frameSize.width = 20;
 				frameSize.height = 20;
 			}
-			default -> bombsAmount = 0;
+			default -> throw new IllegalArgumentException();
 		}
 		this.segmentPanels = new GamePanel[frameSize.height][frameSize.width];
 		
@@ -84,6 +85,10 @@ public class GameFrame extends JFrame {
 		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
+	}
+	
+	public void fill() {
+	
 	}
 	
 	public void processNearbyCells(GamePanel cell) {
