@@ -9,8 +9,10 @@ import java.util.Random;
 
 public class GameFrame extends JFrame {
 	private final GamePanel[][] segmentPanels;
+	Dimension frameSize;
 	
 	public GameFrame(Difficulty difficulty) {
+		// FIXME: 20.10.2020 anomalies on non-extreme difficulties.
 		super("MineSweeper");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(987, 700);
@@ -19,7 +21,7 @@ public class GameFrame extends JFrame {
 		
 		JPanel mainPanel = new JPanel();
 		
-		Dimension frameSize = new Dimension();
+		frameSize = new Dimension();
 		final short bombsAmount;
 		switch (difficulty) {
 			case EASY -> {
@@ -91,14 +93,15 @@ public class GameFrame extends JFrame {
 			for (int y1 : new int[]{y - 1, y + 1}) {
 				GamePanel nextCell = segmentPanels[y1][x1];
 				if ((nextCell.getContent() != null) && nextCell.getContent().equals(""))
-					nextCell.uncover();
+					nextCell.uncoverSafe();
 			}
 		for (int x2 : new int[]{x - 1, x + 1}) {
 			GamePanel nextCell = segmentPanels[y][x2];
 			if ((nextCell.getContent() != null) && nextCell.getContent().equals(""))
-				nextCell.uncover();
+				nextCell.uncoverSafe();
 		}
-		
+		// TODO: 20.10.2020 uncovering all related cells.
+		// FIXME: 20.10.2020 anomalies on non-extreme mode probably derived from constructor.
 	}
 	
 	public boolean allClear() {
