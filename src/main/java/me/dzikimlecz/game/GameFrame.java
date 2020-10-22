@@ -10,7 +10,7 @@ public class GameFrame extends JFrame {
 	private final float bombsAmountFactor;
 	private final Dimension frameSize;
 	
-	public GameFrame(Difficulty difficulty) {
+	protected GameFrame(Difficulty difficulty) {
 		super("MineSweeper");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
@@ -51,7 +51,7 @@ public class GameFrame extends JFrame {
 		this.setVisible(true);
 	}
 	
-	public void generateFromCell(GamePanel cell) {
+	protected void generateFromCell(GamePanel cell) {
 		GamePanel[][] nearbyCells = getNearbyCells(cell);
 		int bombsAmount = (int) (frameSize.getHeight() *  frameSize.getWidth() * bombsAmountFactor);
 		List<Dimension> bombCells = new ArrayList<>(bombsAmount);
@@ -94,7 +94,7 @@ public class GameFrame extends JFrame {
 		
 	}
 	
-	public void processNearbyCells(GamePanel cell) {
+	protected void processNearbyCells(GamePanel cell) {
 		GamePanel[][] nearbyCells = getNearbyCells(cell);
 		for (GamePanel[] row : nearbyCells) {
 			for (GamePanel nearbyCell : row) {
@@ -107,7 +107,7 @@ public class GameFrame extends JFrame {
 		if (allClear()) GameEventManager.getInstance().getGame().endGame(true);
 	}
 	
-	public boolean allClear() {
+	protected boolean allClear() {
 		return Arrays.stream(segmentPanels).allMatch(
 				gamePanels -> Arrays.stream(gamePanels).allMatch(
 						gamePanel -> !gamePanel.isCovered() || gamePanel.hasBomb()));

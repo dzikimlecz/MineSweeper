@@ -16,26 +16,26 @@ public class GamePanel  extends JPanel {
 	private final ActionListener uncoverListener = (event) -> uncover();
 	
 	private boolean hasBomb;
-	public boolean hasBomb() {
+	protected boolean hasBomb() {
 		return hasBomb;
 	}
 	
 	private String content;
-	public String getContent() {
+	protected String getContent() {
 		return content;
 	}
 	
 	private boolean isCovered;
-	public boolean isCovered() {
+	protected boolean isCovered() {
 		return isCovered;
 	}
 	
 	private final Dimension location;
-	public Dimension getLoc() {
+	protected Dimension getLoc() {
 		return location;
 	}
 	
-	public GamePanel(int x, int y) {
+	protected GamePanel(int x, int y) {
 		super();
 		this.isCovered = true;
 		this.location = new Dimension(x, y);
@@ -49,14 +49,14 @@ public class GamePanel  extends JPanel {
 		this.add(uncoverButton, BorderLayout.CENTER);
 	}
 	
-	public void fill(boolean hasBomb, String content) {
+	protected void fill(boolean hasBomb, String content) {
 		this.uncoverButton.removeActionListener(generatePhaseListener);
 		this.hasBomb = hasBomb;
 		this.content = (content != null) ? content : ((hasBomb) ? BOMB_EMOJI : "");
 		this.uncoverButton.addActionListener(uncoverListener);
 	}
 	
-	public void uncover() {
+	protected void uncover() {
 		if (content == null)
 			throw new IllegalStateException("Tried to uncover not-filled GamePanel");
 		this.setVisible(false);
@@ -70,7 +70,7 @@ public class GamePanel  extends JPanel {
 		else if (content.equals("")) game.getFrame().processNearbyCells(this);
 	}
 	
-	public void uncoverSafe() {
+	protected void uncoverSafe() {
 		if (content == null)
 			throw new IllegalStateException("Tried to uncover not-filled GamePanel");
 		if (hasBomb)
