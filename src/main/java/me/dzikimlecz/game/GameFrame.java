@@ -116,19 +116,23 @@ public class GameFrame extends JFrame {
 	private GamePanel[][] getNearbyCells(GamePanel cell) {
 		int x = cell.getLoc().width;
 		int y = cell.getLoc().height;
-		int sizeX = (x == 0 || x == frameSize.width) ? 2 : 3;
-		int sizeY = (y == 0 || x == frameSize.height) ? 2 : 3;
-		var cells = new GamePanel[sizeY][sizeX];
+		var cells = new GamePanel[3][3];
 		int[] yCoords = new int[]{y - 1, y, y + 1};
 		for (int yIndex = 0, yCoordsLength = yCoords.length; yIndex < yCoordsLength; yIndex++) {
 			int y1 = yCoords[yIndex];
 			int[] xCoords = new int[]{x - 1, x, x + 1};
 			for (int xIndex = 0, xCoordsLength = xCoords.length; xIndex < xCoordsLength; xIndex++) {
 				int x1 = xCoords[xIndex];
-				if (y1 == y && x1 == x) cells[yIndex][xIndex] = null;
-				if (y1 < 0 || x1 < 0 || y1 > frameSize.height || x1 > frameSize.width) continue;
-				// FIXME: 21.10.2020 ArrayIndexOutOfBondsException
-				cells[yIndex][xIndex] = segmentPanels[y1][x1];
+				if ((y1 == y && x1 == x) ||
+						(y1 < 0 || x1 < 0 || y1 >= frameSize.height || x1 >= frameSize.width)) {
+					cells[yIndex][xIndex] = null;
+					continue;
+				}
+				try {
+					cells[yIndex][xIndex] = segmentPanels[y1][x1];
+				} catch (Exception e) {
+					System.exit(34234);
+				}
 			}
 		}
 		return cells;
