@@ -1,9 +1,12 @@
 package me.dzikimlecz.game;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.Timer;
-import java.util.TimerTask;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+import java.awt.BorderLayout;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class MineSweeper {
 	private final GameFrame frame;
@@ -20,22 +23,31 @@ public class MineSweeper {
 	}
 	
 	public void endGame(boolean wasGameWon) {
-		var gameLostFrame = new JFrame("Boom");
-		gameLostFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		gameLostFrame.setSize(250, 130);
-		gameLostFrame.setResizable(false);
-		gameLostFrame.setLayout(new BorderLayout());
+		String title = (wasGameWon) ? "All Clear!" : "Boom";
 		String text = (wasGameWon) ? "Congrats! You made it!" : "You've lost :(";
-		var label = new JLabel(text, SwingConstants.CENTER);
-		gameLostFrame.add(label, BorderLayout.CENTER);
-		gameLostFrame.setLocationRelativeTo(null);
-		gameLostFrame.setVisible(true);
-		new Timer().schedule(new TimerTask() {
+		var gameEndDialog = new JDialog(frame, title, true);
+		gameEndDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+		gameEndDialog.setSize(250, 130);
+		gameEndDialog.setResizable(false);
+		gameEndDialog.setLocationRelativeTo(frame);
+		gameEndDialog.setLayout(new BorderLayout());
+		
+		gameEndDialog.addWindowListener(new WindowListener() {
 			@Override
-			public void run() {
-				frame.setVisible(false);
+			public void windowClosed(WindowEvent e) {
+				frame.dispose();
 			}
-		}, 750);
-		gameLostFrame.setAlwaysOnTop(true);
+			public void windowOpened(WindowEvent ignore) {}
+			public void windowClosing(WindowEvent ignore) {}
+			public void windowIconified(WindowEvent ignore) {}
+			public void windowDeiconified(WindowEvent ignore) {}
+			public void windowActivated(WindowEvent ignore) {}
+			public void windowDeactivated(WindowEvent ignore) {}
+		});
+		
+		var label = new JLabel(text, SwingConstants.CENTER);
+		gameEndDialog.add(label, BorderLayout.CENTER);
+		
+		gameEndDialog.setVisible(true);
 	}
 }

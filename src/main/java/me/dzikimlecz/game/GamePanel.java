@@ -1,12 +1,19 @@
 package me.dzikimlecz.game;
 
-import javax.swing.*;
-import java.awt.*;
+import org.jetbrains.annotations.Nullable;
+
+import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 public class GamePanel  extends JPanel {
 	private final String BOMB_EMOJI = "\uD83D\uDCA3";
-	
 	
 	private final JButton uncoverButton;
 	private final ActionListener generatePhaseListener = (event) -> {
@@ -42,28 +49,23 @@ public class GamePanel  extends JPanel {
 		hasBomb = false;
 		content = null;
 		this.setBackground(Color.white);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(new Color(0xFFE189)));
 		this.setLayout(new BorderLayout());
-		uncoverButton = new JButton(".");
+		uncoverButton = new JButton("\u0000");
+		uncoverButton.setBackground(Color.black);
 		uncoverButton.addActionListener(generatePhaseListener);
 		this.add(uncoverButton, BorderLayout.CENTER);
 	}
 	
-	protected void fill(boolean hasBomb, String content) {
+	protected void fill(boolean hasBomb, @Nullable String content) {
 		this.uncoverButton.removeActionListener(generatePhaseListener);
 		this.hasBomb = hasBomb;
 		this.content = (content != null) ? content : ((hasBomb) ? BOMB_EMOJI : "");
 		this.uncoverButton.addActionListener(uncoverListener);
 	}
 	
-	protected void uncover() {
-		if (content == null)
-			throw new IllegalStateException("Tried to uncover not-filled GamePanel");
-		this.setVisible(false);
-		this.remove(uncoverButton);
-		this.add(new JLabel(content, SwingConstants.CENTER), BorderLayout.CENTER);
-		this.setVisible(true);
-		this.isCovered = false;
+	private void uncover() {
+		uncoverSafe();
 		MineSweeper game = GameEventManager.getInstance().getGame();
 		if (hasBomb) game.endGame(false);
 		else if (game.getFrame().allClear()) game.endGame(true);
@@ -73,8 +75,6 @@ public class GamePanel  extends JPanel {
 	protected void uncoverSafe() {
 		if (content == null)
 			throw new IllegalStateException("Tried to uncover not-filled GamePanel");
-		if (hasBomb)
-			throw new IllegalStateException("Tried to safely uncover bomb cell.");
 		this.setVisible(false);
 		this.remove(uncoverButton);
 		this.add(new JLabel(content, SwingConstants.CENTER), BorderLayout.CENTER);

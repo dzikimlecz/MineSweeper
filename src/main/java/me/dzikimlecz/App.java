@@ -2,14 +2,13 @@ package me.dzikimlecz;
 
 
 import me.dzikimlecz.game.Difficulty;
-import me.dzikimlecz.game.MineSweeper;
+import me.dzikimlecz.setup.LauncherFrame;
 
-import javax.swing.*;
+import javax.swing.SwingUtilities;
 
 public class App {
-	
+	public static Difficulty difficulty = Difficulty.HARD;
 	public static void main(String[] args) {
-		
-		SwingUtilities.invokeLater(() -> new MineSweeper(Difficulty.EXTREME));
+		SwingUtilities.invokeLater(LauncherFrame::new);
 	}
 }

@@ -8,6 +8,13 @@ version '1.0-SNAPSHOT'
 
 sourceCompatibility = JavaVersion.VERSION_14
 
+jar {
+    manifest {
+        attributes "Main-Class": "me.dzikimlecz.App"
+    }
+}
+
+
 sourceSets {
     main({
         java {

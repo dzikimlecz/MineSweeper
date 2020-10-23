@@ -1,9 +1,15 @@
 package me.dzikimlecz.game;
 
-import javax.swing.*;
-import java.awt.*;
-import java.util.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class GameFrame extends JFrame {
 	private final GamePanel[][] segmentPanels;
@@ -47,6 +53,7 @@ public class GameFrame extends JFrame {
 		
 		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		this.pack();
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
 	}
