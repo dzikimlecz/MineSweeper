@@ -25,7 +25,7 @@ public class MineSweeper {
 	public void endGame(boolean wasGameWon) {
 		String title = (wasGameWon) ? "All Clear!" : "Boom";
 		String text = (wasGameWon) ? "Congrats! You made it!" : "You've lost :(";
-		var gameEndDialog = new JDialog(frame, title, true);
+		JDialog gameEndDialog = new JDialog(frame, title, true);
 		gameEndDialog.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		gameEndDialog.setSize(250, 130);
 		gameEndDialog.setResizable(false);
@@ -45,7 +45,7 @@ public class MineSweeper {
 			public void windowDeactivated(WindowEvent ignore) {}
 		});
 		
-		var label = new JLabel(text, SwingConstants.CENTER);
+		JLabel label = new JLabel(text, SwingConstants.CENTER);
 		gameEndDialog.add(label, BorderLayout.CENTER);
 		
 		gameEndDialog.setVisible(true);

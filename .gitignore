@@ -1,8 +1,8 @@
 build/
 .idea/
-gradle
-build
+gradle/
+settings.gradle
 gradlew
 gradlew.bat
 logs/
-DebugLog.java
+.gradle/

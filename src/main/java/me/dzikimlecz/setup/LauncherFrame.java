@@ -31,21 +31,21 @@ public class LauncherFrame extends JFrame {
 	
 	@NotNull
 	private JPanel initMainPanel() {
-		var mainPanel = new JPanel(new GridLayout(2, 2));
+		JPanel mainPanel = new JPanel(new GridLayout(2, 2));
 		mainPanel.setBorder(BorderFactory.createTitledBorder("MineSweeper"));
 		
 		
-		var difficultyPanel = new JPanel(new BorderLayout());
+		JPanel difficultyPanel = new JPanel(new BorderLayout());
 		difficultyPanel.add(new JLabel("Difficulty:"), BorderLayout.CENTER);
-		var difficultyBox = new JComboBox<String>();
+		JComboBox<String> difficultyBox = new JComboBox<>();
 		difficultyBox.setEditable(false);
 		for (Difficulty value : Difficulty.values())
 			difficultyBox.addItem(value.toString());
 		difficultyBox.setSelectedIndex(0);
 		difficultyPanel.add(difficultyBox, BorderLayout.SOUTH);
 		
-		var proceedPanel = new JPanel(new BorderLayout());
-		var start = new JButton("Start");
+		JPanel proceedPanel = new JPanel(new BorderLayout());
+		JButton start = new JButton("Start");
 		start.addActionListener(e -> {
 			String selected = (String) difficultyBox.getSelectedItem();
 			if (selected == null) showDialogBox();
@@ -67,20 +67,20 @@ public class LauncherFrame extends JFrame {
 	}
 	
 	private void showDialogBox() {
-		var dialogBox = new JDialog(this, "MineSweeper", true);
+		JDialog dialogBox = new JDialog(this, "MineSweeper", true);
 		dialogBox.setSize(250,150);
 		dialogBox.setResizable(false);
 		dialogBox.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		dialogBox.setLayout(new BorderLayout());
 		dialogBox.setLocationRelativeTo(this);
 		
-		var upperPanel = new JPanel(new BorderLayout());
+		JPanel upperPanel = new JPanel(new BorderLayout());
 		upperPanel.add(new JLabel("Please select difficulty!"),
 		               BorderLayout.CENTER);
 		upperPanel.setBorder(BorderFactory.createEmptyBorder(30,30,0,0));
 		
-		var lowerPanel = new JPanel(new BorderLayout());
-		var okBut = new JButton("Ok");
+		JPanel lowerPanel = new JPanel(new BorderLayout());
+		JButton okBut = new JButton("Ok");
 		okBut.addActionListener(e -> dialogBox.dispose());
 		lowerPanel.setBorder(BorderFactory.createEmptyBorder(30,150,10,20));
 		lowerPanel.add(okBut);

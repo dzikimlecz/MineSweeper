@@ -4,9 +4,9 @@ plugins {
 }
 
 group 'me.dzikimlecz'
-version '1.0'
+version '1.0.8'
 
-sourceCompatibility = JavaVersion.VERSION_14
+sourceCompatibility = JavaVersion.VERSION_1_8
 
 jar {
     manifest {

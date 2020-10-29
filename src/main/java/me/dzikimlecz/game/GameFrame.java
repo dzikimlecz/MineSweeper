@@ -24,23 +24,24 @@ public class GameFrame extends JFrame {
 		JPanel mainPanel = new JPanel();
 		
 		switch (difficulty) {
-			case EASY -> {
+			case EASY:
 				frameSize = new Dimension(10, 14);
 				bombsAmountFactor = 0.1f;
-			}
-			case MEDIUM -> {
+				break;
+			case MEDIUM:
 				frameSize = new Dimension(12, 22);
 				bombsAmountFactor = 0.2f;
-			}
-			case HARD -> {
+				break;
+			case HARD:
 				frameSize = new Dimension(27, 30);
 				bombsAmountFactor = 0.3f;
-			}
-			case EXTREME -> {
+				break;
+			case EXTREME:
 				frameSize = new Dimension(40, 35);
 				bombsAmountFactor = 0.4f;
-			}
-			default -> throw new IllegalStateException("Unexpected value: " + difficulty);
+				break;
+			default:
+				throw new IllegalStateException("Unexpected value: " + difficulty);
 		}
 		
 		this.segmentPanels = new GamePanel[frameSize.height][frameSize.width];
@@ -64,9 +65,9 @@ public class GameFrame extends JFrame {
 		List<Dimension> bombCells = new ArrayList<>(bombsAmount);
 		boolean invalidBomb;
 		for (int i = 0; i < bombsAmount; i++) {
-			var bomb = new Dimension();
+			Dimension bomb = new Dimension();
 			do {
-				var rand = new Random();
+				Random rand = new Random();
 				bomb.width = rand.nextInt(frameSize.width);
 				bomb.height = rand.nextInt(frameSize.height);
 				invalidBomb = bombCells.contains(bomb) || bomb.equals(cell.getLoc()) ||
@@ -123,7 +124,7 @@ public class GameFrame extends JFrame {
 	private GamePanel[][] getNearbyCells(GamePanel cell) {
 		int x = cell.getLoc().width;
 		int y = cell.getLoc().height;
-		var cells = new GamePanel[3][3];
+		GamePanel[][] cells = new GamePanel[3][3];
 		int[] yCoords = new int[]{y - 1, y, y + 1};
 		for (int yIndex = 0, yCoordsLength = yCoords.length; yIndex < yCoordsLength; yIndex++) {
 			int y1 = yCoords[yIndex];
