@@ -1,5 +1,8 @@
 package me.dzikimlecz.game;
 
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.enums.ToggleMode;
+
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -9,17 +12,29 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 public class MineSweeper {
-	private final GameFrame frame;
+	public static final String FLAG_EMOJI = "\uD83D\uDEA9";
+	public static final String PICKAXE_EMOJI = "\u26CF\uFE0F";
+	public static final String BOMB_EMOJI = "\uD83D\uDCA3";
 	
+	private final GameFrame frame;
 	public GameFrame getFrame() {
 		return frame;
+	}
+	
+	private ToggleMode toggleMode;
+	public ToggleMode getToggleMode() {
+		return toggleMode;
+	}
+	public void setToggleMode(ToggleMode toggleMode) {
+		this.toggleMode = toggleMode;
 	}
 	
 	public MineSweeper(Difficulty difficulty) {
 		GameEventManager.getInstance().registerGame(this);
 		frame = new GameFrame(difficulty);
-		frame.setAlwaysOnTop(true);
-		frame.setAlwaysOnTop(false);
+		frame.setLocationRelativeTo(null);
+		frame.toFront();
+		frame.setVisible(true);
 	}
 	
 	public void endGame(boolean wasGameWon) {

@@ -1,8 +1,7 @@
 package me.dzikimlecz.setup;
 
-import me.dzikimlecz.game.Difficulty;
+import me.dzikimlecz.game.enums.Difficulty;
 import me.dzikimlecz.game.MineSweeper;
-import org.jetbrains.annotations.NotNull;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -29,18 +28,17 @@ public class LauncherFrame extends JFrame {
 		setVisible(true);
 	}
 	
-	@NotNull
 	private JPanel initMainPanel() {
 		JPanel mainPanel = new JPanel(new GridLayout(2, 2));
 		mainPanel.setBorder(BorderFactory.createTitledBorder("MineSweeper"));
 		
-		
 		JPanel difficultyPanel = new JPanel(new BorderLayout());
 		difficultyPanel.add(new JLabel("Difficulty:"), BorderLayout.CENTER);
 		JComboBox<String> difficultyBox = new JComboBox<>();
+		
 		difficultyBox.setEditable(false);
 		for (Difficulty value : Difficulty.values())
-			difficultyBox.addItem(value.toString());
+			difficultyBox.addItem(value.parse());
 		difficultyBox.setSelectedIndex(0);
 		difficultyPanel.add(difficultyBox, BorderLayout.SOUTH);
 		

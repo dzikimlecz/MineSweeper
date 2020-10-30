@@ -1,67 +1,74 @@
 package me.dzikimlecz.game;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.enums.ToggleMode;
+
+import javax.swing.*;
+import javax.swing.border.TitledBorder;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class GameFrame extends JFrame {
-	private final GamePanel[][] segmentPanels;
-	private final float bombsAmountFactor;
+	private final GameCellPanel[][] segmentPanels;
+	private final int bombsAmount;
 	private final Dimension frameSize;
+	private final TitledBorder border;
 	
 	protected GameFrame(Difficulty difficulty) {
 		super("MineSweeper");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
 		this.setLayout(new BorderLayout());
-		JPanel mainPanel = new JPanel();
 		
 		switch (difficulty) {
 			case EASY:
 				frameSize = new Dimension(10, 14);
-				bombsAmountFactor = 0.1f;
 				break;
 			case MEDIUM:
 				frameSize = new Dimension(12, 22);
-				bombsAmountFactor = 0.2f;
 				break;
 			case HARD:
 				frameSize = new Dimension(27, 30);
-				bombsAmountFactor = 0.3f;
 				break;
 			case EXTREME:
 				frameSize = new Dimension(40, 35);
-				bombsAmountFactor = 0.4f;
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + difficulty);
 		}
 		
-		this.segmentPanels = new GamePanel[frameSize.height][frameSize.width];
-		mainPanel.setBackground(Color.lightGray);
-		mainPanel.setLayout(new GridLayout(frameSize.height, frameSize.width));
+		bombsAmount = (int) (difficulty.getBombsFactor() * frameSize.width * frameSize.height);
 		
+		this.segmentPanels = new GameCellPanel[frameSize.height][frameSize.width];
+		
+		JPanel mainPanel = new JPanel();
+		border = BorderFactory.createTitledBorder("Bombs: " + bombsAmount);
+		mainPanel.setBorder(border);
+		
+		
+		
+		JPanel gamePanel = new JPanel();
+		gamePanel.setBackground(Color.lightGray);
+		gamePanel.setLayout(new GridLayout(frameSize.height, frameSize.width));
 		for (int y = 0; y < segmentPanels.length; y++)
 			for (int x = 0; x < segmentPanels[y].length; x++)
-				mainPanel.add(segmentPanels[y][x] = new GamePanel(x, y));
+				gamePanel.add(segmentPanels[y][x] = new GameCellPanel(x, y));
 		
-		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
+		JPanel menuPanel = new JPanel();
+		menuPanel.setBackground(Color.lightGray);
+		
+		
+		
+		this.getContentPane().add(gamePanel, BorderLayout.CENTER);
 		this.pack();
 		this.setResizable(false);
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
 	}
 	
-	protected void generateFromCell(GamePanel cell) {
-		GamePanel[][] nearbyCells = getNearbyCells(cell);
-		int bombsAmount = (int) (frameSize.getHeight() *  frameSize.getWidth() * bombsAmountFactor);
+	protected void generateFromCell(GameCellPanel cell) {
+		GameEventManager.getInstance().getGame().setToggleMode(ToggleMode.DIG);
+		GameCellPanel[][] nearbyCells = getNearbyCells(cell);
 		List<Dimension> bombCells = new ArrayList<>(bombsAmount);
 		boolean invalidBomb;
 		for (int i = 0; i < bombsAmount; i++) {
@@ -102,10 +109,10 @@ public class GameFrame extends JFrame {
 		
 	}
 	
-	protected void processNearbyCells(GamePanel cell) {
-		GamePanel[][] nearbyCells = getNearbyCells(cell);
-		for (GamePanel[] row : nearbyCells) {
-			for (GamePanel nearbyCell : row) {
+	protected void processNearbyCells(GameCellPanel cell) {
+		GameCellPanel[][] nearbyCells = getNearbyCells(cell);
+		for (GameCellPanel[] row : nearbyCells) {
+			for (GameCellPanel nearbyCell : row) {
 				if (nearbyCell != null && nearbyCell.isCovered()) {
 					nearbyCell.uncoverSafe();
 					if ( nearbyCell.getContent().equals("")) processNearbyCells(nearbyCell);
@@ -117,14 +124,14 @@ public class GameFrame extends JFrame {
 	
 	protected boolean allClear() {
 		return Arrays.stream(segmentPanels).allMatch(
-				gamePanels -> Arrays.stream(gamePanels).allMatch(
-						gamePanel -> !gamePanel.isCovered() || gamePanel.hasBomb()));
+				gameCellPanels -> Arrays.stream(gameCellPanels).allMatch(
+						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.hasBomb()));
 	}
 	
-	private GamePanel[][] getNearbyCells(GamePanel cell) {
+	private GameCellPanel[][] getNearbyCells(GameCellPanel cell) {
 		int x = cell.getLoc().width;
 		int y = cell.getLoc().height;
-		GamePanel[][] cells = new GamePanel[3][3];
+		GameCellPanel[][] cells = new GameCellPanel[3][3];
 		int[] yCoords = new int[]{y - 1, y, y + 1};
 		for (int yIndex = 0, yCoordsLength = yCoords.length; yIndex < yCoordsLength; yIndex++) {
 			int y1 = yCoords[yIndex];

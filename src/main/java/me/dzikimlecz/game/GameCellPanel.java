@@ -12,15 +12,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
-public class GamePanel  extends JPanel {
-	private final String BOMB_EMOJI = "\uD83D\uDCA3";
-	
-	private final JButton uncoverButton;
-	private final ActionListener generatePhaseListener = (event) -> {
-		GameEventManager.getInstance().getGame().getFrame().generateFromCell(this);
-		uncover();
-	};
-	private final ActionListener uncoverListener = (event) -> uncover();
+public class GameCellPanel extends JPanel {
+	private final MineSweeper game = GameEventManager.getInstance().getGame();
 	
 	private boolean hasBomb;
 	protected boolean hasBomb() {
@@ -42,7 +35,32 @@ public class GamePanel  extends JPanel {
 		return location;
 	}
 	
-	protected GamePanel(int x, int y) {
+	private final JButton uncoverButton;
+	private final ActionListener generatePhaseListener = event -> {
+		game.getFrame().generateFromCell(this);
+		uncover();
+	};
+	private final ActionListener gamePhaseListener = event -> {
+		switch (game.getToggleMode()) {
+			case DIG:
+				uncover();
+				break;
+			case MARK:
+				mark();
+				break;
+		}
+	};
+	private final ActionListener markedListener = event -> {
+		switch (game.getToggleMode()) {
+			case DIG:
+				break;
+			case MARK:
+				removeMark();
+				break;
+		}
+	};
+	
+	protected GameCellPanel(int x, int y) {
 		super();
 		this.isCovered = true;
 		this.location = new Dimension(x, y);
@@ -60,13 +78,13 @@ public class GamePanel  extends JPanel {
 	protected void fill(boolean hasBomb, @Nullable String content) {
 		this.uncoverButton.removeActionListener(generatePhaseListener);
 		this.hasBomb = hasBomb;
-		this.content = (content != null) ? content : ((hasBomb) ? BOMB_EMOJI : "");
-		this.uncoverButton.addActionListener(uncoverListener);
+		this.content = (content != null) ? content : ((hasBomb) ? MineSweeper.BOMB_EMOJI : "");
+		this.uncoverButton.addActionListener(gamePhaseListener);
 	}
 	
 	private void uncover() {
 		uncoverSafe();
-		MineSweeper game = GameEventManager.getInstance().getGame();
+		
 		if (hasBomb) game.endGame(false);
 		else if (game.getFrame().allClear()) game.endGame(true);
 		else if (content.equals("")) game.getFrame().processNearbyCells(this);
@@ -82,4 +100,15 @@ public class GamePanel  extends JPanel {
 		this.isCovered = false;
 	}
 	
+	private void mark() {
+		uncoverButton.removeActionListener(gamePhaseListener);
+		uncoverButton.setText(MineSweeper.FLAG_EMOJI);
+		uncoverButton.addActionListener(markedListener);
+	}
+	
+	private void removeMark() {
+		uncoverButton.removeActionListener(markedListener);
+		uncoverButton.setText("\u0000");
+		uncoverButton.addActionListener(gamePhaseListener);
+	}
 }
