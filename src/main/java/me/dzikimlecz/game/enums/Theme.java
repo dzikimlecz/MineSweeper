@@ -1,4 +1,4 @@
-package me.dzikimlecz.setup;
+package me.dzikimlecz.game.enums;
 
 import me.dzikimlecz.game.enums.Parsable;
 
