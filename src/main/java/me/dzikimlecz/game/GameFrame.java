@@ -13,9 +13,15 @@ import java.util.Random;
 
 public class GameFrame extends JFrame {
 	private final GameCellPanel[][] segmentPanels;
-	private final int bombsAmount;
+	protected final int bombsAmount;
 	private final Dimension frameSize;
+	protected int flags;
+	public TitledBorder getBorder() {
+		return border;
+	}
+	
 	private final TitledBorder border;
+	private boolean generated;
 	
 	protected GameFrame(Difficulty difficulty) {
 		super("MineSweeper");
@@ -40,14 +46,14 @@ public class GameFrame extends JFrame {
 		}
 		
 		bombsAmount = (int) (difficulty.getBombsFactor() * frameSize.width * frameSize.height);
+		flags = 0;
 		
 		this.segmentPanels = new GameCellPanel[frameSize.height][frameSize.width];
 		
 		JPanel mainPanel = new JPanel();
 		border = BorderFactory.createTitledBorder("Bombs: " + bombsAmount);
 		mainPanel.setBorder(border);
-		
-		
+		mainPanel.setLayout(new GridBagLayout());
 		
 		JPanel gamePanel = new JPanel();
 		gamePanel.setBackground(Color.lightGray);
@@ -56,12 +62,38 @@ public class GameFrame extends JFrame {
 			for (int x = 0; x < segmentPanels[y].length; x++)
 				gamePanel.add(segmentPanels[y][x] = new GameCellPanel(x, y));
 		
+		generated = false;
+		
 		JPanel menuPanel = new JPanel();
+		menuPanel.setLayout(new BorderLayout());
 		menuPanel.setBackground(Color.lightGray);
+		JToggleButton toggleButton = new JToggleButton(MineSweeper.PICKAXE_EMOJI);
+		toggleButton.addItemListener(event -> {
+			if (generated) {
+				MineSweeper game = GameEventManager.getInstance().getGame();
+				if (toggleButton.isSelected()) {
+					toggleButton.setText(MineSweeper.FLAG_EMOJI);
+					game.setToggleMode(ToggleMode.MARK);
+				} else {
+					toggleButton.setText(MineSweeper.PICKAXE_EMOJI);
+					game.setToggleMode(ToggleMode.DIG);
+				}
+			}
+		});
+		toggleButton.setBackground(Color.lightGray);
+		menuPanel.add(toggleButton, BorderLayout.CENTER);
 		
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.weighty = 5;
+		mainPanel.add(menuPanel, gbc);
 		
+		gbc.weighty = 95;
+		gbc.gridy = 1;
+		mainPanel.add(gamePanel, gbc);
 		
-		this.getContentPane().add(gamePanel, BorderLayout.CENTER);
+		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 		this.pack();
 		this.setResizable(false);
 	}
@@ -105,7 +137,7 @@ public class GameFrame extends JFrame {
 				segmentPanels[y][x].fill(hasBomb, content);
 			}
 		}
-		
+		generated = true;
 		
 	}
 	

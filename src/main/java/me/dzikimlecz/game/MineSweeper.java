@@ -13,7 +13,7 @@ import java.awt.event.WindowListener;
 
 public class MineSweeper {
 	public static final String FLAG_EMOJI = "\uD83D\uDEA9";
-	public static final String PICKAXE_EMOJI = "\u26CF\uFE0F";
+	public static final String PICKAXE_EMOJI = "\u26CF";
 	public static final String BOMB_EMOJI = "\uD83D\uDCA3";
 	
 	private final GameFrame frame;
@@ -36,6 +36,8 @@ public class MineSweeper {
 		frame.toFront();
 		frame.setVisible(true);
 	}
+	
+	
 	
 	public void endGame(boolean wasGameWon) {
 		String title = (wasGameWon) ? "All Clear!" : "Boom";

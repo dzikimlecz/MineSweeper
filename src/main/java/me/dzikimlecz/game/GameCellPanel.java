@@ -69,8 +69,9 @@ public class GameCellPanel extends JPanel {
 		this.setBackground(Color.white);
 		this.setBorder(BorderFactory.createLineBorder(new Color(0xFFE189)));
 		this.setLayout(new BorderLayout());
-		uncoverButton = new JButton("\u0000");
+		uncoverButton = new JButton("     ");
 		uncoverButton.setBackground(Color.black);
+		uncoverButton.setForeground(Color.white);
 		uncoverButton.addActionListener(generatePhaseListener);
 		this.add(uncoverButton, BorderLayout.CENTER);
 	}
@@ -84,7 +85,6 @@ public class GameCellPanel extends JPanel {
 	
 	private void uncover() {
 		uncoverSafe();
-		
 		if (hasBomb) game.endGame(false);
 		else if (game.getFrame().allClear()) game.endGame(true);
 		else if (content.equals("")) game.getFrame().processNearbyCells(this);
@@ -102,13 +102,19 @@ public class GameCellPanel extends JPanel {
 	
 	private void mark() {
 		uncoverButton.removeActionListener(gamePhaseListener);
+		GameFrame frame = game.getFrame();
+		frame.getBorder().setTitle("Bombs left: " + (frame.bombsAmount - ++frame.flags));
+		frame.repaint();
 		uncoverButton.setText(MineSweeper.FLAG_EMOJI);
 		uncoverButton.addActionListener(markedListener);
 	}
 	
 	private void removeMark() {
 		uncoverButton.removeActionListener(markedListener);
-		uncoverButton.setText("\u0000");
+		GameFrame frame = game.getFrame();
+		frame.getBorder().setTitle("Bombs left: " + (frame.bombsAmount - --frame.flags));
+		frame.repaint();
+		uncoverButton.setText("     ");
 		uncoverButton.addActionListener(gamePhaseListener);
 	}
 }
