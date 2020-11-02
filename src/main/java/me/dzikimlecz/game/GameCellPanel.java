@@ -13,7 +13,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 
 public class GameCellPanel extends JPanel {
-	private final MineSweeper game = GameEventManager.getInstance().getGame();
+	private final MineSweeper game = GameManager.getInstance().getGame();
 	
 	private boolean hasBomb;
 	protected boolean hasBomb() {

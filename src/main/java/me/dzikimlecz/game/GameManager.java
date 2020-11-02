@@ -1,7 +1,7 @@
 package me.dzikimlecz.game;
 
-public class GameEventManager {
-	private static GameEventManager instance;
+public class GameManager {
+	private static GameManager instance;
 	private MineSweeper game;
 	
 	protected MineSweeper getGame() {
@@ -12,9 +12,13 @@ public class GameEventManager {
 		this.game = game;
 	}
 	
-	protected static GameEventManager getInstance() {
+	protected static void clear() {
+		instance = null;
+	}
+	
+	protected static GameManager getInstance() {
 		if (instance == null) {
-			instance = new GameEventManager();
+			instance = new GameManager();
 		}
 		return instance;
 	}

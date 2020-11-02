@@ -1,11 +1,13 @@
 package me.dzikimlecz.game.enums;
 
 public enum Difficulty implements Parsable {
-	EASY, MEDIUM, HARD, EXTREME;
+	/*DEBUG,*/ EASY, MEDIUM, HARD, EXTREME;
 	
 	
 	public float getBombsFactor() {
 		switch (this) {
+			/*case DEBUG:
+				return 0.07f;*/
 			case EASY:
 				return 0.15f;
 			case MEDIUM:

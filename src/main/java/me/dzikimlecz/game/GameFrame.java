@@ -12,11 +12,20 @@ import java.util.List;
 import java.util.Random;
 
 public class GameFrame extends JFrame {
-	private final GameCellPanel[][] segmentPanels;
+	private GameCellPanel[][] segmentPanels;
 	protected final int bombsAmount;
 	private final Dimension frameSize;
 	protected int flags;
-	public TitledBorder getBorder() {
+	
+	private final GameTimer timer;
+	protected void stopTimer() {
+		timer.stop();
+	}
+	protected String getTime() {
+		return timer.toString();
+	}
+	
+	protected TitledBorder getBorder() {
 		return border;
 	}
 	
@@ -29,6 +38,7 @@ public class GameFrame extends JFrame {
 		this.setLayout(new BorderLayout());
 		
 		switch (difficulty) {
+			//case DEBUG:
 			case EASY:
 				frameSize = new Dimension(10, 14);
 				break;
@@ -45,8 +55,9 @@ public class GameFrame extends JFrame {
 				throw new IllegalStateException("Unexpected value: " + difficulty);
 		}
 		
-		bombsAmount = (int) (difficulty.getBombsFactor() * frameSize.width * frameSize.height);
-		flags = 0;
+		this.bombsAmount = (int) (difficulty.getBombsFactor() * frameSize.width * frameSize.height);
+		this.flags = 0;
+		this.timer = new GameTimer();
 		
 		this.segmentPanels = new GameCellPanel[frameSize.height][frameSize.width];
 		
@@ -66,11 +77,10 @@ public class GameFrame extends JFrame {
 		
 		JPanel menuPanel = new JPanel();
 		menuPanel.setLayout(new BorderLayout());
-		menuPanel.setBackground(Color.lightGray);
 		JToggleButton toggleButton = new JToggleButton(MineSweeper.PICKAXE_EMOJI);
 		toggleButton.addItemListener(event -> {
 			if (generated) {
-				MineSweeper game = GameEventManager.getInstance().getGame();
+				MineSweeper game = GameManager.getInstance().getGame();
 				if (toggleButton.isSelected()) {
 					toggleButton.setText(MineSweeper.FLAG_EMOJI);
 					game.setToggleMode(ToggleMode.MARK);
@@ -78,9 +88,11 @@ public class GameFrame extends JFrame {
 					toggleButton.setText(MineSweeper.PICKAXE_EMOJI);
 					game.setToggleMode(ToggleMode.DIG);
 				}
-			}
+			} else toggleButton.doClick();
 		});
 		toggleButton.setBackground(Color.lightGray);
+		//timer.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, frameSize.width/2));
+		menuPanel.add(timer, BorderLayout.LINE_START);
 		menuPanel.add(toggleButton, BorderLayout.CENTER);
 		
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -99,7 +111,7 @@ public class GameFrame extends JFrame {
 	}
 	
 	protected void generateFromCell(GameCellPanel cell) {
-		GameEventManager.getInstance().getGame().setToggleMode(ToggleMode.DIG);
+		GameManager.getInstance().getGame().setToggleMode(ToggleMode.DIG);
 		GameCellPanel[][] nearbyCells = getNearbyCells(cell);
 		List<Dimension> bombCells = new ArrayList<>(bombsAmount);
 		boolean invalidBomb;
@@ -138,7 +150,7 @@ public class GameFrame extends JFrame {
 			}
 		}
 		generated = true;
-		
+		timer.start();
 	}
 	
 	protected void processNearbyCells(GameCellPanel cell) {
@@ -151,7 +163,7 @@ public class GameFrame extends JFrame {
 				}
 			}
 		}
-		if (allClear()) GameEventManager.getInstance().getGame().endGame(true);
+		if (allClear()) GameManager.getInstance().getGame().endGame(true);
 	}
 	
 	protected boolean allClear() {
@@ -185,4 +197,7 @@ public class GameFrame extends JFrame {
 		return cells;
 	}
 	
+	protected void clear() {
+		segmentPanels = null;
+	}
 }
