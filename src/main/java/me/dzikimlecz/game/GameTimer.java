@@ -3,16 +3,33 @@ package me.dzikimlecz.game;
 import javax.swing.JLabel;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * JLabel subclass representing a Stopper counting minutes and seconds in separate thread
+ */
 public class GameTimer extends JLabel {
+	// TODO: 04.11.2020 change from thread to timer
+	
 	private byte seconds;
 	private byte minutes;
-	private Thread stopperThread;
-	private AtomicBoolean isRunning = new AtomicBoolean(true);
 	
+	/**
+	 * The Thread in which Stopper is running
+	 */
+	private final Thread stopperThread;
+	/**
+	 * Condition required by stopper to run.
+	 * If it's value is false, stopper stops itself
+	 */
+	private final AtomicBoolean isRunning = new AtomicBoolean(true);
+	
+	/**
+	 * Creates new GameTimer instance
+	 */
 	public GameTimer() {
 		super("  0:00");
 		seconds = 0;
 		minutes = 0;
+		// Every 1000ms increments seconds and repaints. Every 60s increments minutes
 		stopperThread = new Thread(() -> {
 			while (isRunning.get()) {
 				try {
@@ -20,28 +37,49 @@ public class GameTimer extends JLabel {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				if(++seconds > 60) {
+				if(++seconds == 60) {
 					seconds = 0;
-					if (++minutes > 60)
-						minutes = 0;
+					minutes++;
 				}
-				this.setText(this.toString());
 				this.repaint();
 			}
 		});
 		
 	}
 	
-	public void start() {
+	/**
+	 * Starts measuring the time
+	 */
+	public synchronized void start() {
 		stopperThread.start();
 	}
 	
-	public void stop() {
+	/**
+	 * Stops measuring the time and repaints.
+	 */
+	public synchronized void stop() {
 		isRunning.set(false);
-		this.setText(this.toString());
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		this.repaint();
 	}
 	
+	/**
+	 * Sets text to formatted time string and calls method of superclass
+	 */
+	@Override
+	public void repaint() {
+		setText(this.toString());
+		super.repaint();
+	}
+	
+	/**
+	 * Formats seconds and minutes to (m:ss) (max 2 digits for m)
+	 * @return string of formatted seconds and minutes
+	 */
 	@Override
 	public String toString() {
 		return String.format("%2d:%02d", minutes, seconds);

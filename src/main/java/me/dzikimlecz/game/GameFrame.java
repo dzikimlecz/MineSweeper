@@ -9,29 +9,70 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Main game window, contains all cells
+ * @see GameCellPanel
+ * @see GameTimer
+ */
 public class GameFrame extends JFrame {
+	/**
+	 * All cells contained in the frame
+	 */
 	private GameCellPanel[][] segmentPanels;
-	protected final int bombsAmount;
-	private final Dimension frameSize;
+	/**
+	 * Amount of mined cells in {@code segmentPanels}
+	 */
+	protected final int minesAmount;
+	/**
+	 * width and height of {@code segmentPanels}
+	 */
+	private Dimension frameSize;
+	/**
+	 * amount of flagged cells in {@code segmentPanels}
+	 */
 	protected int flags;
 	
-	private final GameTimer timer;
+	/**
+	 * Timer showing time passed from start of the game
+	 */
+	private GameTimer timer;
+	/**
+	 * stops measuring time in {@code timer}.
+	 */
 	protected void stopTimer() {
 		timer.stop();
 	}
+	/**
+	 * gets formatted time from {@code timer}.
+	 * @return time in format (m:SS).
+	 */
 	protected String getTime() {
 		return timer.toString();
 	}
 	
+	/**
+	 * Border of the frame
+	 */
+	private TitledBorder border;
+	/**
+	 * Gets border of the frame.
+	 * @return TitledBorder instance being current border of frame.
+	 */
 	protected TitledBorder getBorder() {
 		return border;
 	}
 	
-	private final TitledBorder border;
+	/**
+	 * Indicates if mines were already generated.
+	 */
 	private boolean generated;
 	
+	/**
+	 * creates new GameFrame with amount of cells and mines based on selected difficulty
+	 * @param difficulty base for generating cells details.
+	 */
 	protected GameFrame(Difficulty difficulty) {
 		super("MineSweeper");
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -55,28 +96,29 @@ public class GameFrame extends JFrame {
 				throw new IllegalStateException("Unexpected value: " + difficulty);
 		}
 		
-		this.bombsAmount = (int) (difficulty.getBombsFactor() * frameSize.width * frameSize.height);
+		this.minesAmount = (int) (difficulty.getMinesFactor() * frameSize.width * frameSize.height);
 		this.flags = 0;
 		this.timer = new GameTimer();
-		
+		this.generated = false;
 		this.segmentPanels = new GameCellPanel[frameSize.height][frameSize.width];
 		
+		//panel containing all components
 		JPanel mainPanel = new JPanel();
-		border = BorderFactory.createTitledBorder("Bombs: " + bombsAmount);
+		border = BorderFactory.createTitledBorder("Mines: " + minesAmount);
 		mainPanel.setBorder(border);
 		mainPanel.setLayout(new GridBagLayout());
 		
+		//panel containing cells
 		JPanel gamePanel = new JPanel();
 		gamePanel.setBackground(Color.lightGray);
 		gamePanel.setLayout(new GridLayout(frameSize.height, frameSize.width));
 		for (int y = 0; y < segmentPanels.length; y++)
 			for (int x = 0; x < segmentPanels[y].length; x++)
 				gamePanel.add(segmentPanels[y][x] = new GameCellPanel(x, y));
-		
-		generated = false;
-		
+		//panel containing timer and toggle
 		JPanel menuPanel = new JPanel();
 		menuPanel.setLayout(new BorderLayout());
+		//button used to switch mode of interaction with cells.
 		JToggleButton toggleButton = new JToggleButton(MineSweeper.PICKAXE_EMOJI);
 		toggleButton.addItemListener(event -> {
 			if (generated) {
@@ -88,10 +130,9 @@ public class GameFrame extends JFrame {
 					toggleButton.setText(MineSweeper.PICKAXE_EMOJI);
 					game.setToggleMode(ToggleMode.DIG);
 				}
-			} else toggleButton.doClick();
+			} else if(toggleButton.isSelected()) toggleButton.doClick();
 		});
 		toggleButton.setBackground(Color.lightGray);
-		//timer.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, frameSize.width/2));
 		menuPanel.add(timer, BorderLayout.LINE_START);
 		menuPanel.add(toggleButton, BorderLayout.CENTER);
 		
@@ -110,68 +151,91 @@ public class GameFrame extends JFrame {
 		this.setResizable(false);
 	}
 	
+	/**
+	 * generates mines starting from selected cell
+	 * @param cell cell to be not surrounded by any mines
+	 */
 	protected void generateFromCell(GameCellPanel cell) {
 		GameManager.getInstance().getGame().setToggleMode(ToggleMode.DIG);
 		GameCellPanel[][] nearbyCells = getNearbyCells(cell);
-		List<Dimension> bombCells = new ArrayList<>(bombsAmount);
-		boolean invalidBomb;
-		for (int i = 0; i < bombsAmount; i++) {
-			Dimension bomb = new Dimension();
+		List<Dimension> mineCells = new ArrayList<>(minesAmount);
+		boolean invalidMine;
+		for (int i = 0; i < minesAmount; i++) {
+			Dimension mineLoc = new Dimension();
+			/*
+			Tries to randomly generate mine until it founds a valid location.
+			If generated location is already mined, is a cell passed as arg, or neighbours to
+			that cell, it will retry. Otherwise it will be mined.
+			*/
 			do {
-				Random rand = new Random();
-				bomb.width = rand.nextInt(frameSize.width);
-				bomb.height = rand.nextInt(frameSize.height);
-				invalidBomb = bombCells.contains(bomb) || bomb.equals(cell.getLoc()) ||
+				mineLoc.width = ThreadLocalRandom.current().nextInt(frameSize.width);
+				mineLoc.height = ThreadLocalRandom.current().nextInt(frameSize.height);
+				invalidMine = mineCells.contains(mineLoc) || mineLoc.equals(cell.getLoc()) ||
 						Arrays.stream(nearbyCells).anyMatch(
 								cells -> Arrays.stream(cells).anyMatch(
-										(cell1) -> cell1 != null && cell1.getLoc().equals(bomb)
+										(cell1) -> cell1 != null && cell1.getLoc().equals(mineLoc)
 								));
-			} while (invalidBomb);
-			bombCells.add(bomb);
+			} while (invalidMine);
+			mineCells.add(mineLoc);
 		}
-		
+		// Checks how many bombs surround every cell, and fills it.
 		for (int y = 0; y < segmentPanels.length; y++) {
 			for (int x = 0; x < segmentPanels[y].length; x++) {
-				boolean hasBomb = bombCells.contains(new Dimension(x, y));
+				boolean hasMine = mineCells.contains(new Dimension(x, y));
 				String content = null;
-				if (!hasBomb) {
-					int nearbyBombs = 0;
+				if (!hasMine) {
+					int nearbyMines = 0;
 					for (int x1 : new int[]{x - 1, x, x + 1}) {
 						for (int y1 : new int[]{y-1, y, y+1}) {
 							if (y1 == y && x1 == x) continue;
-							if (bombCells.contains(new Dimension(x1, y1)))
-								nearbyBombs++;
+							if (mineCells.contains(new Dimension(x1, y1)))
+								nearbyMines++;
 						}
 					}
-					content = (nearbyBombs != 0) ? String.valueOf(nearbyBombs) : null;
+					content = (nearbyMines != 0) ? String.valueOf(nearbyMines) : null;
 				}
-				
-				segmentPanels[y][x].fill(hasBomb, content);
+				//fills
+				segmentPanels[y][x].fill(hasMine, content);
 			}
 		}
 		generated = true;
 		timer.start();
 	}
 	
-	protected void processNearbyCells(GameCellPanel cell) {
+	/**
+	 * Recursively uncovers cells surrounded by ordered empty cell
+	 * @param cell empty cell being starting point of uncovering.
+	 */
+	protected void uncoverNearbyCells(GameCellPanel cell) {
 		GameCellPanel[][] nearbyCells = getNearbyCells(cell);
 		for (GameCellPanel[] row : nearbyCells) {
 			for (GameCellPanel nearbyCell : row) {
 				if (nearbyCell != null && nearbyCell.isCovered()) {
 					nearbyCell.uncoverSafe();
-					if ( nearbyCell.getContent().equals("")) processNearbyCells(nearbyCell);
+					if ( nearbyCell.getContent().equals("")) uncoverNearbyCells(nearbyCell);
 				}
 			}
 		}
 		if (allClear()) GameManager.getInstance().getGame().endGame(true);
 	}
 	
+	/**
+	 * checks if all cells are cleared
+	 * @return {@code true}, if all cells are uncovered or contain a mine, otherwise {@code false}
+	 */
 	protected boolean allClear() {
 		return Arrays.stream(segmentPanels).allMatch(
 				gameCellPanels -> Arrays.stream(gameCellPanels).allMatch(
-						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.hasBomb()));
+						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.hasMine()));
 	}
 	
+	/**
+	 * Gets all cells surrounding selected one.
+	 * @param cell location of which surroundings are ordered
+	 * @return 2 dimensional array of size 3x3 containing surrounding cells. If cell lies on
+	 * border, non existing surroundings will be represented as {@code null} reference. Cell used as
+	 * argument is also represented as {@code null} reference.
+	 */
 	private GameCellPanel[][] getNearbyCells(GameCellPanel cell) {
 		int x = cell.getLoc().width;
 		int y = cell.getLoc().height;
@@ -182,21 +246,24 @@ public class GameFrame extends JFrame {
 			int[] xCoords = new int[]{x - 1, x, x + 1};
 			for (int xIndex = 0, xCoordsLength = xCoords.length; xIndex < xCoordsLength; xIndex++) {
 				int x1 = xCoords[xIndex];
+				/*
+				if cell is non-existent in segmentPanels or is the one passed as an arg, fills
+				 with null reference
+				*/
 				if ((y1 == y && x1 == x) ||
 						(y1 < 0 || x1 < 0 || y1 >= frameSize.height || x1 >= frameSize.width)) {
 					cells[yIndex][xIndex] = null;
 					continue;
 				}
-				try {
-					cells[yIndex][xIndex] = segmentPanels[y1][x1];
-				} catch (Exception e) {
-					System.exit(34234);
-				}
+				cells[yIndex][xIndex] = segmentPanels[y1][x1];
 			}
 		}
 		return cells;
 	}
 	
+	/**
+	 * clears memory
+	 */
 	protected void clear() {
 		segmentPanels = null;
 	}
