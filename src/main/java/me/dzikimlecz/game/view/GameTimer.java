@@ -1,4 +1,6 @@
-package me.dzikimlecz.game;
+package me.dzikimlecz.game.view;
+
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.JLabel;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -6,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * JLabel subclass representing a Stopper counting minutes and seconds in separate thread
  */
-public class GameTimer extends JLabel {
+public class GameTimer extends JLabel implements Cloneable{
 	// TODO: 04.11.2020 change from thread to timer
 	
 	private byte seconds;
@@ -37,7 +39,7 @@ public class GameTimer extends JLabel {
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-				if(++seconds == 60) {
+				if(isRunning.get() && ++seconds == 60) {
 					seconds = 0;
 					minutes++;
 				}
@@ -59,11 +61,6 @@ public class GameTimer extends JLabel {
 	 */
 	public synchronized void stop() {
 		isRunning.set(false);
-		try {
-			Thread.sleep(500);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		this.repaint();
 	}
 	
@@ -83,5 +80,13 @@ public class GameTimer extends JLabel {
 	@Override
 	public String toString() {
 		return String.format("%2d:%02d", minutes, seconds);
+	}
+	
+	public GameTimer clone() {
+		try {
+			return (GameTimer) super.clone();
+		} catch (CloneNotSupportedException e) {
+			return null;
+		}
 	}
 }

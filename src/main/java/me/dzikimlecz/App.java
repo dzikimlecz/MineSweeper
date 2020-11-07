@@ -1,7 +1,7 @@
 package me.dzikimlecz;
 
 import me.dzikimlecz.game.enums.Difficulty;
-import me.dzikimlecz.game.MineSweeper;
+import me.dzikimlecz.game.control.MineSweeper;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -14,7 +14,6 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
 // TODO: 03.11.2020 Migrate from Swing to JavaFX. ASAP.
-// TODO: 04.11.2020 separate model from view. Increase role of GameManager controller.
 
 /**
  * Main Class, represents set up frame and starts game.
@@ -99,7 +98,7 @@ public class App extends JFrame {
 	 * */
 	@Override
 	public void dispose() {
-		SwingUtilities.invokeLater(() -> new MineSweeper(difficulty));
+		SwingUtilities.invokeLater(() -> MineSweeper.getInstance().startGame(difficulty));
 		super.dispose();
 	}
 }
