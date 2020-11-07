@@ -108,7 +108,10 @@ public class MineSweeper {
 	 * @param isGameWon sets result of the game and popup message
 	 */
 	public void endGame(boolean isGameWon) {
-		
+		if(!isGameWon)
+			for (GameCell[] cellsRow : cells)
+				for (GameCell cell : cellsRow)
+					if (cell.hasMine()) cell.uncover();
 		frame.repaint();
 		frame.stopTimer();
 		String title = (isGameWon) ? "All Clear!" : "Boom";
