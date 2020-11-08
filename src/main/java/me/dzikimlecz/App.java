@@ -1,5 +1,6 @@
 package me.dzikimlecz;
 
+import javafx.application.Application;
 import me.dzikimlecz.game.control.ConfigFrame;
 import me.dzikimlecz.game.enums.Difficulty;
 import me.dzikimlecz.game.control.MineSweeper;
@@ -7,6 +8,7 @@ import me.dzikimlecz.game.control.MineSweeper;
 import javax.swing.SwingUtilities;
 
 // TODO: 03.11.2020 Migrate from Swing to JavaFX. ASAP.
+// TODO: 08.11.2020 nerf Hard difficulty
 
 /**
  * Main Class, represents set up frame and starts game.

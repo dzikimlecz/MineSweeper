@@ -34,20 +34,26 @@ public class ConfigFrame extends JFrame {
 	private JPanel initSetUpPanel(JPanel panel) {
 		panel.setLayout(new GridLayout(2, 2));
 		panel.setBorder(BorderFactory.createTitledBorder("MineSweeper"));
+		
 		//JPanel containing components used to select difficulty.
 		JPanel difficultyPanel = new JPanel(new BorderLayout());
 		difficultyPanel.add(new JLabel("Difficulty:"), BorderLayout.CENTER);
+		
 		//JComboBox used to select difficulty.
 		JComboBox<String> difficultyBox = new JComboBox<>();
 		difficultyBox.setEditable(false);
+		
 		//fill all possible values from difficulty enum
 		for (Difficulty value : Difficulty.values())
 			difficultyBox.addItem(value.parseString());
+		
 		//prevents NullPointerException
 		difficultyBox.setSelectedIndex(0);
 		difficultyPanel.add(difficultyBox, BorderLayout.SOUTH);
+		
 		//panel containing components used to start an actual game.
 		JPanel proceedPanel = new JPanel(new BorderLayout());
+		
 		//button starting the game
 		JButton start = new JButton("Start");
 		start.addActionListener(event -> {

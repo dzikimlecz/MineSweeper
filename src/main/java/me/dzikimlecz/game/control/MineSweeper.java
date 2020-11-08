@@ -268,6 +268,7 @@ public class MineSweeper {
 		if (!hasStarted) {
 			generateFromCell(cell);
 			uncoverNearbyCells(cell);
+			frame.startTimer();
 		}
 		switch (toggleMode) {
 			case DIG:

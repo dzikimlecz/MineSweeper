@@ -75,7 +75,6 @@ public class GameFrame extends JFrame {
 		gbc.weighty = 95;
 		gbc.gridy = 1;
 		mainPanel.add(gamePanel, gbc);
-		timer.start();
 		this.getContentPane().add(mainPanel, BorderLayout.CENTER);
 	}
 	
@@ -100,5 +99,9 @@ public class GameFrame extends JFrame {
 	
 	public void setTitle(String title) {
 		((TitledBorder) mainPanel.getBorder()).setTitle(title);
+	}
+	
+	public void startTimer() {
+		timer.start();
 	}
 }
