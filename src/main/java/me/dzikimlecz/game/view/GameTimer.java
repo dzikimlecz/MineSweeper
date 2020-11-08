@@ -1,7 +1,5 @@
 package me.dzikimlecz.game.view;
 
-import org.jetbrains.annotations.Nullable;
-
 import javax.swing.JLabel;
 import java.util.concurrent.atomic.AtomicBoolean;
 

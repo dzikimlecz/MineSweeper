@@ -11,6 +11,7 @@ import javax.swing.SwingUtilities;
 /**
  * Main Class, represents set up frame and starts game.
  * @see MineSweeper
+ * @see ConfigFrame
  */
 public class App {
 	
@@ -37,7 +38,4 @@ public class App {
 			}).start();
 		});
 	}
-	
-	
-	
 }

@@ -8,8 +8,6 @@ import java.util.Map;
 
 public class Colours {
 	
-	
-	
 	private static Colours instance;
 	
 	public static Colours getInstance() {
