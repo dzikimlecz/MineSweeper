@@ -1,8 +1,8 @@
-package me.dzikimlecz.game.control;
+package me.dzikimlecz.swing.game.control;
 
-import me.dzikimlecz.App;
-import me.dzikimlecz.game.enums.Difficulty;
-import me.dzikimlecz.game.enums.Theme;
+import me.dzikimlecz.swing.App;
+import me.dzikimlecz.javafx.game.enums.Difficulty;
+import me.dzikimlecz.javafx.game.enums.Theme;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +43,7 @@ public class ConfigFrame extends JFrame {
 		JComboBox<String> difficultyBox = new JComboBox<>();
 		difficultyBox.setEditable(false);
 		
-		//fill all possible values from difficulty enum
+		//fill all possible values from difficulty enums
 		for (Difficulty value : Difficulty.values())
 			difficultyBox.addItem(value.parseString());
 		

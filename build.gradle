@@ -29,7 +29,7 @@ sourceSets {
     })
 }
 
-mainClassName = 'me.dzikimlecz.App'
+mainClassName = 'me.dzikimlecz.javafx.AppFX'
 
 
 repositories {

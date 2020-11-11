@@ -1,4 +1,4 @@
-package me.dzikimlecz.game.view;
+package me.dzikimlecz.swing.game.view;
 
 import javax.swing.JLabel;
 import java.util.concurrent.atomic.AtomicBoolean;

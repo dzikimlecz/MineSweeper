@@ -1,4 +1,4 @@
-package me.dzikimlecz.fx;
+package me.dzikimlecz.javafx;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
@@ -9,27 +9,32 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import me.dzikimlecz.game.enums.Difficulty;
-import me.dzikimlecz.game.enums.Theme;
+import me.dzikimlecz.javafx.game.Control.GameProperties;
+import me.dzikimlecz.javafx.game.enums.Difficulty;
+import me.dzikimlecz.javafx.game.enums.Theme;
 
 import java.util.List;
 
 public class ConfigsWindow {
 	
-	private Stage primaryStage;
+	private Stage stage;
 	private ComboBox<String> difficultyBox;
 	private ComboBox<String> themeBox;
 	
-	public void start(Stage primaryStage) {
-		this.primaryStage = primaryStage;
-		primaryStage.setTitle("Game Launcher");
-		primaryStage.setWidth(410);
-		primaryStage.setHeight(200);
-		primaryStage.setResizable(false);
-		primaryStage.centerOnScreen();
-		primaryStage.toFront();
-		primaryStage.setScene(initConfigScene());
-		primaryStage.show();
+	public Stage stage() {
+		return stage;
+	}
+	
+	public void start(Stage stage) {
+		this.stage = stage;
+		stage.setTitle("Game Launcher");
+		stage.setWidth(410);
+		stage.setHeight(200);
+		stage.setResizable(false);
+		stage.centerOnScreen();
+		stage.toFront();
+		stage.setScene(initConfigScene());
+		stage.show();
 	}
 	
 	private Scene initConfigScene() {
@@ -122,6 +127,6 @@ public class ConfigsWindow {
 		                        Difficulty.parseDifficulty(difficultyBox.getValue()));
 		GameProperties.register("theme",
 		                        Theme.parseTheme(themeBox.getValue()));
-		primaryStage.close();
+		stage.close();
 	}
 }

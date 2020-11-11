@@ -1,9 +1,9 @@
-package me.dzikimlecz.game.control;
+package me.dzikimlecz.swing.game.control;
 
-import me.dzikimlecz.game.enums.Difficulty;
-import me.dzikimlecz.game.enums.ToggleMode;
-import me.dzikimlecz.game.view.GameCell;
-import me.dzikimlecz.game.view.GameFrame;
+import me.dzikimlecz.javafx.game.enums.Difficulty;
+import me.dzikimlecz.javafx.game.enums.ToggleMode;
+import me.dzikimlecz.swing.game.view.GameCell;
+import me.dzikimlecz.swing.game.view.GameFrame;
 
 import javax.swing.*;
 import java.awt.*;

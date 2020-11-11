@@ -1,4 +1,4 @@
-package me.dzikimlecz.game.enums;
+package me.dzikimlecz.javafx.game.enums;
 
 /**
  * Enum representing difficulty of the game.
@@ -7,8 +7,8 @@ public enum Difficulty implements Parsable {
 	/*DEBUG,*/ EASY, MEDIUM, HARD, EXTREME;
 	
 	/**
-	 * Converts readable string to enum value.
-	 * @param value readable form of enum.
+	 * Converts readable string to enums value.
+	 * @param value readable form of enums.
 	 * @return difficulty value of value parameter
 	 */
 	public static Difficulty parseDifficulty(String value) {
@@ -16,7 +16,7 @@ public enum Difficulty implements Parsable {
 	}
 	
 	/**
-	 * returns mines factor depending on enum value
+	 * returns mines factor depending on enums value
 	 * @return float being a percentage of cells to be bombed.
 	 */
 	public float getMinesFactor() {

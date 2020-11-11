@@ -1,6 +1,6 @@
-package me.dzikimlecz.game.colors;
+package me.dzikimlecz.swing.game.colors;
 
-import me.dzikimlecz.game.enums.Theme;
+import me.dzikimlecz.javafx.game.enums.Theme;
 
 import java.awt.*;
 import java.util.HashMap;

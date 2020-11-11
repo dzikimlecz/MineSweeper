@@ -1,9 +1,8 @@
-package me.dzikimlecz;
+package me.dzikimlecz.swing;
 
-import javafx.application.Application;
-import me.dzikimlecz.game.control.ConfigFrame;
-import me.dzikimlecz.game.enums.Difficulty;
-import me.dzikimlecz.game.control.MineSweeper;
+import me.dzikimlecz.swing.game.control.ConfigFrame;
+import me.dzikimlecz.javafx.game.enums.Difficulty;
+import me.dzikimlecz.swing.game.control.MineSweeper;
 
 import javax.swing.SwingUtilities;
 

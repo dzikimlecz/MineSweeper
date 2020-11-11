@@ -1,4 +1,4 @@
-package me.dzikimlecz.fx;
+package me.dzikimlecz.javafx.game.Control;
 
 import java.util.HashMap;
 import java.util.Map;

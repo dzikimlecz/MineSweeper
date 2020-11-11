@@ -1,4 +1,4 @@
-package me.dzikimlecz.game.enums;
+package me.dzikimlecz.javafx.game.enums;
 
 //not used yet.
 /**

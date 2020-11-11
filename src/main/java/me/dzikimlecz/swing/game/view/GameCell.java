@@ -1,6 +1,6 @@
-package me.dzikimlecz.game.view;
+package me.dzikimlecz.swing.game.view;
 
-import me.dzikimlecz.game.control.MineSweeper;
+import me.dzikimlecz.swing.game.control.MineSweeper;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.BorderFactory;
