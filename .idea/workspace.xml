@@ -1,0 +1,444 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:main" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2cf0936a-9b4c-4dc1-94e7-a75eebf042ae" name="Default Changelist" comment="program with not working configurations" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Enum" />
+        <option value="Interface" />
+        <option value="AnnotationType" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.1.1\plugins\maven\lib\maven3" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProjectId" id="1j2uPZs09CObCLDeUo0CTTesnmA" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA&#10;HgIgnore" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.1826544" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Color Scheme Font" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/main/java/me/dzikimlecz/game/control/ConfigFrame.java" />
+  </component>
+  <component name="RunManager" selected="Application.AppFX">
+    <configuration name="App (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.dzikimlecz.App" />
+      <module name="MineSweeper.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.dzikimlecz.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="App" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="me.dzikimlecz.App" />
+      <module name="MineSweeper.main" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AppFX" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="me.dzikimlecz.fx.AppFX" />
+      <module name="MineSweeper.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="me.dzikimlecz.fx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="me.dzikimlecz.App" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Local" activateToolWindowBeforeRun="false">
+      <setting name="replType" value="NREPL" />
+      <setting name="execution" value="LEININGEN" />
+      <setting name="jvmArgs" value="" />
+      <setting name="parameters" value="" />
+      <setting name="workingDir" value="" />
+      <setting name="profiles" value="" />
+      <setting name="aliases" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="ClojureREPL" factoryName="Remote" activateToolWindowBeforeRun="false">
+      <setting name="host" value="" />
+      <setting name="port" value="0" />
+      <setting name="replType" value="SOCKET" />
+      <setting name="configType" value="SPECIFY" />
+      <setting name="replPortFileType" value="STANDARD" />
+      <setting name="customPortFile" value="" />
+      <setting name="fixLineNumbers" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration name="MineSweeper [run]" type="GradleRunConfiguration" factoryName="Gradle" nameIsGenerated="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--stacktrace" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="run" />
+          </list>
+        </option>
+        <option name="vmOptions" value="" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2">
+        <option name="Gradle.BeforeRunTask" enabled="false" tasks="compileJava" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="processResources" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+        <option name="Gradle.BeforeRunTask" enabled="true" tasks="classes" externalProjectPath="$PROJECT_DIR$" vmOptions="" scriptParameters="" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.App" />
+      <item itemvalue="Gradle.MineSweeper [run]" />
+      <item itemvalue="Application.App (1)" />
+      <item itemvalue="Application.AppFX" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.AppFX" />
+        <item itemvalue="Application.App (1)" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2cf0936a-9b4c-4dc1-94e7-a75eebf042ae" name="Default Changelist" comment="" />
+      <created>1603014486946</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603014486946</updated>
+    </task>
+    <task id="LOCAL-00001" summary="commit before updating to common minesweeper rules">
+      <created>1603279635565</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1603279635565</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Updated access modifiers in game package from public to protected">
+      <created>1603362769025</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1603362769025</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Added Title wit number of mines left to mark">
+      <created>1604090227120</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1604090227120</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added documentation and cleaned code.">
+      <created>1604518787758</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1604518787758</updated>
+    </task>
+    <task id="LOCAL-00005" summary="program with not working configurations">
+      <created>1605090469515</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1605090469515</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="User">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="*" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="commit before updating to common minesweeper rules" />
+    <MESSAGE value="Updated access modifiers in game package from public to protected" />
+    <MESSAGE value="Added Title wit number of mines left to mark" />
+    <MESSAGE value="Added documentation and cleaned code." />
+    <MESSAGE value="cleaned useless files from previous commits" />
+    <MESSAGE value="program with not working configurations" />
+    <option name="LAST_COMMIT_MESSAGE" value="program with not working configurations" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="354" y="0" width="825" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1605091602942">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="354" y="0" width="825" height="824" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1605091602942" />
+    <state x="478" y="165" width="1092" height="947" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604872285179" />
+    <state x="478" y="216" width="1092" height="834" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.2048.1122@0.0.2048.1122" timestamp="1603015693155" />
+    <state x="722" y="346" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604788438695">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="722" y="346" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1604788438695" />
+    <state x="622" y="204" key="#com.intellij.ide.util.MemberChooser" timestamp="1605084984647">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="622" y="204" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1605084984647" />
+    <state x="663" y="218" key="#com.intellij.ide.util.MemberChooser/0.0.1638.882@0.0.1638.882" timestamp="1604475777171" />
+    <state x="663" y="220" key="#com.intellij.ide.util.MemberChooser/0.0.1638.892@0.0.1638.892" timestamp="1603398693387" />
+    <state x="829" y="275" key="#com.intellij.ide.util.MemberChooser/0.0.2048.1112@0.0.2048.1112" timestamp="1605025336212" />
+    <state x="829" y="277" key="#com.intellij.ide.util.MemberChooser/0.0.2048.1122@0.0.2048.1122" timestamp="1603439721242" />
+    <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1605084795768">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="535" y="268" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1536.824@0.0.1536.824" timestamp="1605084795768" />
+    <state x="701" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1604528598851">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="701" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604528598851" />
+    <state x="754" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604004400569">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="603" y="245" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1638.892@0.0.1638.892" timestamp="1603396000646" />
+    <state x="754" y="305" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604004400569" />
+    <state x="754" y="308" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.2048.1122@0.0.2048.1122" timestamp="1603119226087" />
+    <state x="116" y="116" width="1817" height="881" key="DiffContextDialog" timestamp="1604853992517">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="93" y="93" width="1453" height="706" key="DiffContextDialog/0.0.1638.892@0.0.1638.892" timestamp="1603226956111" />
+    <state x="116" y="116" width="1817" height="881" key="DiffContextDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604853992517" />
+    <state x="889" y="260" key="EnvironmentVariablesDialog" timestamp="1603015190417">
+      <screen x="0" y="0" width="2048" height="1122" />
+    </state>
+    <state x="889" y="260" key="EnvironmentVariablesDialog/0.0.2048.1122@0.0.2048.1122" timestamp="1603015190417" />
+    <state x="804" y="313" key="FileChooserDialogImpl" timestamp="1604853921032">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="804" y="313" key="FileChooserDialogImpl/0.0.2048.1112@0.0.2048.1112" timestamp="1604853921032" />
+    <state x="804" y="316" key="FileChooserDialogImpl/0.0.2048.1122@0.0.2048.1122" timestamp="1603015278218" />
+    <state x="782" y="456" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog" timestamp="1604844199810">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="782" y="456" key="Git.Rebase.Log.Action.NewCommitMessage.Dialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604844199810" />
+    <state width="1537" height="188" key="GridCell.Tab.0.bottom" timestamp="1605091633684">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="188" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605091633684" />
+    <state width="1640" height="217" key="GridCell.Tab.0.bottom/0.0.1638.882@0.0.1638.882" timestamp="1604477697226" />
+    <state width="1640" height="289" key="GridCell.Tab.0.bottom/0.0.1638.892@0.0.1638.892" timestamp="1603400318065" />
+    <state width="2049" height="275" key="GridCell.Tab.0.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1605028975207" />
+    <state width="2049" height="380" key="GridCell.Tab.0.bottom/0.0.2048.1122@0.0.2048.1122" timestamp="1603444447325" />
+    <state width="1537" height="188" key="GridCell.Tab.0.center" timestamp="1605091633684">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="188" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605091633684" />
+    <state width="1640" height="217" key="GridCell.Tab.0.center/0.0.1638.882@0.0.1638.882" timestamp="1604477697226" />
+    <state width="1640" height="289" key="GridCell.Tab.0.center/0.0.1638.892@0.0.1638.892" timestamp="1603400318065" />
+    <state width="2049" height="275" key="GridCell.Tab.0.center/0.0.2048.1112@0.0.2048.1112" timestamp="1605028975207" />
+    <state width="2049" height="380" key="GridCell.Tab.0.center/0.0.2048.1122@0.0.2048.1122" timestamp="1603444447325" />
+    <state width="1537" height="188" key="GridCell.Tab.0.left" timestamp="1605091633684">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="188" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605091633684" />
+    <state width="1640" height="217" key="GridCell.Tab.0.left/0.0.1638.882@0.0.1638.882" timestamp="1604477697225" />
+    <state width="1640" height="289" key="GridCell.Tab.0.left/0.0.1638.892@0.0.1638.892" timestamp="1603400318065" />
+    <state width="2049" height="275" key="GridCell.Tab.0.left/0.0.2048.1112@0.0.2048.1112" timestamp="1605028975207" />
+    <state width="2049" height="380" key="GridCell.Tab.0.left/0.0.2048.1122@0.0.2048.1122" timestamp="1603444447324" />
+    <state width="1537" height="188" key="GridCell.Tab.0.right" timestamp="1605091633684">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1537" height="188" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605091633684" />
+    <state width="1640" height="217" key="GridCell.Tab.0.right/0.0.1638.882@0.0.1638.882" timestamp="1604477697226" />
+    <state width="1640" height="289" key="GridCell.Tab.0.right/0.0.1638.892@0.0.1638.892" timestamp="1603400318065" />
+    <state width="2049" height="275" key="GridCell.Tab.0.right/0.0.2048.1112@0.0.2048.1112" timestamp="1605028975207" />
+    <state width="2049" height="380" key="GridCell.Tab.0.right/0.0.2048.1122@0.0.2048.1122" timestamp="1603444447325" />
+    <state width="2049" height="376" key="GridCell.Tab.1.bottom" timestamp="1604168834126">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="1640" height="289" key="GridCell.Tab.1.bottom/0.0.1638.892@0.0.1638.892" timestamp="1603227743202" />
+    <state width="2049" height="376" key="GridCell.Tab.1.bottom/0.0.2048.1112@0.0.2048.1112" timestamp="1604168834126" />
+    <state width="2049" height="381" key="GridCell.Tab.1.bottom/0.0.2048.1122@0.0.2048.1122" timestamp="1603015783588" />
+    <state width="2049" height="376" key="GridCell.Tab.1.center" timestamp="1604168834126">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="1640" height="289" key="GridCell.Tab.1.center/0.0.1638.892@0.0.1638.892" timestamp="1603227743202" />
+    <state width="2049" height="376" key="GridCell.Tab.1.center/0.0.2048.1112@0.0.2048.1112" timestamp="1604168834126" />
+    <state width="2049" height="381" key="GridCell.Tab.1.center/0.0.2048.1122@0.0.2048.1122" timestamp="1603015783588" />
+    <state width="2049" height="376" key="GridCell.Tab.1.left" timestamp="1604168834126">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="1640" height="289" key="GridCell.Tab.1.left/0.0.1638.892@0.0.1638.892" timestamp="1603227743202" />
+    <state width="2049" height="376" key="GridCell.Tab.1.left/0.0.2048.1112@0.0.2048.1112" timestamp="1604168834126" />
+    <state width="2049" height="381" key="GridCell.Tab.1.left/0.0.2048.1122@0.0.2048.1122" timestamp="1603015783588" />
+    <state width="2049" height="376" key="GridCell.Tab.1.right" timestamp="1604168834126">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="1640" height="289" key="GridCell.Tab.1.right/0.0.1638.892@0.0.1638.892" timestamp="1603227743202" />
+    <state width="2049" height="376" key="GridCell.Tab.1.right/0.0.2048.1112@0.0.2048.1112" timestamp="1604168834126" />
+    <state width="2049" height="381" key="GridCell.Tab.1.right/0.0.2048.1122@0.0.2048.1122" timestamp="1603015783588" />
+    <state x="604" y="299" key="IDE.errors.dialog" timestamp="1604788403874">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="604" y="299" key="IDE.errors.dialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604788403874" />
+    <state x="464" y="31" key="RollbackChangesDialog" timestamp="1605090322299">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="464" y="31" key="RollbackChangesDialog/0.0.1536.824@0.0.1536.824" timestamp="1605090322299" />
+    <state x="265" y="0" key="SettingsEditor" timestamp="1605090150831">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="265" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1605090150831" />
+    <state x="814" y="260" key="SettingsEditor/0.0.2048.1112@0.0.2048.1112" timestamp="1604871182391" />
+    <state width="498" height="446" key="SwitcherDM" timestamp="1604328235260">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state width="498" height="446" key="SwitcherDM/0.0.2048.1112@0.0.2048.1112" timestamp="1604328235260" />
+    <state x="754" y="311" key="extract.method.dialog" timestamp="1603439863378">
+      <screen x="0" y="0" width="2048" height="1122" />
+    </state>
+    <state x="754" y="311" key="extract.method.dialog/0.0.2048.1122@0.0.2048.1122" timestamp="1603439863378" />
+    <state x="732" y="88" width="583" height="936" key="find.popup" timestamp="1605001376208">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="732" y="88" width="583" height="936" key="find.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1605001376208" />
+    <state x="604" y="125" key="new project wizard" timestamp="1603015501829">
+      <screen x="0" y="0" width="2048" height="1122" />
+    </state>
+    <state x="604" y="125" key="new project wizard/0.0.2048.1122@0.0.2048.1122" timestamp="1603015501829" />
+    <state x="727" y="293" key="refactoring.ChangeSignatureDialog" timestamp="1604338547792">
+      <screen x="0" y="0" width="2048" height="1112" />
+    </state>
+    <state x="727" y="293" key="refactoring.ChangeSignatureDialog/0.0.2048.1112@0.0.2048.1112" timestamp="1604338547792" />
+    <state x="510" y="191" key="run.anything.popup" timestamp="1605083957040">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="510" y="191" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1605083957040" />
+    <state x="680" y="258" key="run.anything.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1605018158764" />
+    <state x="515" y="181" width="695" height="498" key="search.everywhere.popup" timestamp="1605084569598">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="515" y="181" width="695" height="498" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1605084569598" />
+    <state x="549" y="195" width="672" height="540" key="search.everywhere.popup/0.0.1638.892@0.0.1638.892" timestamp="1603376022881" />
+    <state x="687" y="244" width="672" height="671" key="search.everywhere.popup/0.0.2048.1112@0.0.2048.1112" timestamp="1604837639055" />
+    <state x="687" y="245" width="672" height="678" key="search.everywhere.popup/0.0.2048.1122@0.0.2048.1122" timestamp="1603443504096" />
+  </component>
+</project>

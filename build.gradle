@@ -5,14 +5,14 @@ plugins {
 }
 
 group 'me.dzikimlecz'
-version '1.1.2'
+version '1.1.2fx'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 jar {
     manifest {
-        attributes "Main-Class": "me.dzikimlecz.App"
+        attributes "Main-Class": "me.dzikimlecz.javafx.AppFX"
     }
 }
 
