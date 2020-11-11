@@ -1,13 +1,13 @@
-package me.dzikimlecz;
+package me.dzikimlecz.fx;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
 
-public class MineSweeper extends Application {
+public class GameWindow {
 	
-	@Override
 	public void start(Stage primaryStage) {
-		primaryStage.setTitle("MineSweeper");
+		primaryStage.
+		primaryStage.setTitle("GameWindow");
 		primaryStage.setHeight(500);
 		primaryStage.setWidth(100);
 		primaryStage.show();

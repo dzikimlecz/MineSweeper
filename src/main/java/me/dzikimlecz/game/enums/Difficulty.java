@@ -8,11 +8,11 @@ public enum Difficulty implements Parsable {
 	
 	/**
 	 * Converts readable string to enum value.
-	 * @param string readable form of enum.
-	 * @return difficulty value of string parameter
+	 * @param value readable form of enum.
+	 * @return difficulty value of value parameter
 	 */
-	public static Difficulty parseDifficulty(String string) {
-		return Difficulty.valueOf(string.replaceAll("\\s", "_").toUpperCase());
+	public static Difficulty parseDifficulty(String value) {
+		return Difficulty.valueOf(value.replaceAll("\\s", "_").toUpperCase());
 	}
 	
 	/**
