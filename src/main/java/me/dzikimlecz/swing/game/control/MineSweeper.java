@@ -87,7 +87,7 @@ public class MineSweeper {
 				throw new IllegalStateException("Unexpected value: " + difficulty);
 		}
 		frameSize = new Dimension(x, y);
-		frame.setSize(x, y);
+		frame.setGridSize(x, y);
 		cells = new GameCell[y][x];
 		minesAmount = (int) (x * y * difficulty.getMinesFactor());
 		for (int y1 = 0; y1 < y; y1++) {

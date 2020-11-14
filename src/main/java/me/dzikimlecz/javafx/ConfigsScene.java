@@ -5,40 +5,26 @@ import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 import me.dzikimlecz.javafx.game.Control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.Theme;
 
 import java.util.List;
 
-public class ConfigsWindow {
+public class ConfigsScene extends Scene {
 	
-	private Stage stage;
 	private ComboBox<String> difficultyBox;
 	private ComboBox<String> themeBox;
 	
-	public Stage stage() {
-		return stage;
-	}
-	
-	public void start(Stage stage) {
-		this.stage = stage;
-		stage.setTitle("Game Launcher");
-		stage.setWidth(410);
-		stage.setHeight(200);
-		stage.setResizable(false);
-		stage.centerOnScreen();
-		stage.toFront();
-		stage.setScene(initConfigScene());
-		stage.show();
-	}
-	
-	private Scene initConfigScene() {
-		GridPane grid = new GridPane();
+	public ConfigsScene() {
+		super(new GridPane());
+		
+		GridPane grid = (GridPane) this.getRoot();
 		grid.setPadding(new Insets(15, 10, 15, 10));
 		grid.setHgap(200);
 		grid.setVgap(20);
@@ -62,8 +48,6 @@ public class ConfigsWindow {
 		GridPane.setConstraints(difficultyPane, 0, 0);
 		gridChildren.add(difficultyPane);
 		
-		
-		
 		FlowPane themePane = new FlowPane();
 		themePane.setOrientation(Orientation.VERTICAL);
 		themePane.setVgap(7);
@@ -81,22 +65,17 @@ public class ConfigsWindow {
 		GridPane.setConstraints(themePane, 0, 1);
 		gridChildren.add(themePane);
 		
-		
 		BorderPane proceedPane = new BorderPane();
 		Button startButton = new Button("Start");
 		startButton.setFont(Font.font(14));
 		startButton.setOnAction(this::commit);
 		
-		
 		proceedPane.setBottom(startButton);
 		
 		GridPane.setConstraints(proceedPane, 1, 1);
 		gridChildren.add(proceedPane);
-		
-		
-		
-		return new Scene(grid);
 	}
+	
 	
 	public static void setFontSize(ComboBox<String> comboBox, double size) {
 		class ComboBoxCell extends ListCell<String> {
@@ -127,6 +106,7 @@ public class ConfigsWindow {
 		                        Difficulty.parseDifficulty(difficultyBox.getValue()));
 		GameProperties.register("theme",
 		                        Theme.parseTheme(themeBox.getValue()));
-		stage.close();
+		AppFX.getInstance().startGame();
 	}
+	
 }

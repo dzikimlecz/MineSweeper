@@ -37,7 +37,7 @@ public class GameFrame extends JFrame {
 		this.timer = new GameTimer();
 	}
 	
-	public void setSize(int x, int y) {
+	public void setGridSize(int x, int y) {
 		this.frameSize = new Dimension(x, y);
 	}
 	
