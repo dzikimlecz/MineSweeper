@@ -30,41 +30,6 @@ public class GameCell extends JPanel {
 	 */
 	private final JButton uncoverButton;
 	
-	/*
-	/**
-	*Listener used before the generation of the field. After a click, bombs are generated.
-	* /
-	private final ActionListener generatePhaseListener = event -> {
-		game.generateFromCell(this);
-		uncover();
-	};
-	/**
-	 *Listener used after generation and before any click. Uncovers or marks a button.
-	 * /
-	private final ActionListener gamePhaseListener = event -> {
-		switch (game.getToggleMode()) {
-			case DIG:
-				uncover();
-				break;
-			case MARK:
-				mark();
-				break;
-		}
-	};
-	/**
-	 *Listener used after marking of the cell. Removes mark it or stays idle depending on the
-	 * state of the toggle.
-	 * /
-	private final ActionListener markedListener = event -> {
-		switch (game.getToggleMode()) {
-			case DIG:
-				break;
-			case MARK:
-				removeMark();
-				break;
-		}
-	};
-	*/
 	/**
 	 * Gets if there is a mine in a cell
 	 * @return {@code true} if the cell contains a mine, {@code false} if not
@@ -87,17 +52,8 @@ public class GameCell extends JPanel {
 		return isCovered;
 	}
 	
-	/**
-	 * Gets text content of the cell.
-	 * @return A bomb emoji if the cell is mined, a digit if any neighbouring field is mined, and
-	 * otherwise an empty string.
-	 */
-	public String getContent() {
-		return content;
-	}
-	
-	public boolean isEmpty() {
-		return content.equals("");
+	public boolean isClear() {
+		return content.isEmpty();
 	}
 	
 	public boolean isNotMarked() {

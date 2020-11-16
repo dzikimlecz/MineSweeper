@@ -1,12 +1,38 @@
 package me.dzikimlecz.javafx;
 
-import javafx.application.Application;
-import javafx.application.Platform;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import me.dzikimlecz.javafx.game.Control.EventListeners;
+import me.dzikimlecz.javafx.game.Control.GameProperties;
+import me.dzikimlecz.javafx.game.enums.Difficulty;
+import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
 
-public class AppFX extends Application {
-	public static final String PICKAXE_EMOJI = "";
+public class AppFX extends javafx.application.Application {
+	
+	/**
+	 * Emoji used as icon on buttons. (&#xD83D;&#xDEA9;)
+	 */
+	public static final String FLAG_EMOJI = "\uD83D\uDEA9";
+	/**
+	 * Emoji used as icon on {@code toggleMode} button. (&#x26CF;)
+	 */
+	public static final String PICKAXE_EMOJI = "\u26CF";
+	/**
+	 * Emoji used as icon on labels (&#xD83D;&#xDCA3;)
+	 */
+	public static final String BOMB_EMOJI = "\uD83D\uDCA3";
+	
 	private static AppFX instance;
 	
 	public static AppFX getInstance() {
@@ -17,7 +43,7 @@ public class AppFX extends Application {
 	private Stage window;
 	
 	@Override
-	public void start(Stage primaryStage) throws Exception {
+	public void start(Stage primaryStage) {
 		instance = this;
 		window = primaryStage;
 		startConfigs();
@@ -38,6 +64,40 @@ public class AppFX extends Application {
 		window.hide();
 		window.setTitle("MineSweeper");
 		gameScene = new GameScene();
+		
+		int x;
+		int y;
+		switch ((Difficulty) GameProperties.get("difficulty")) {
+			//case DEBUG:
+			case EASY:
+				x = 10;
+				y = 14;
+				break;
+			case MEDIUM:
+				x = 12;
+				y = 22;
+				break;
+			case HARD:
+				x = 27;
+				y = 30;
+				break;
+			case EXTREME:
+				x = 40;
+				y = 35;
+				break;
+			default:
+				throw new IllegalStateException(
+						"Unexpected value: " + GameProperties.get("difficulty"));
+		}
+		
+		GameCell[][] cells = new GameCell[y][x];
+		for (int y1 = 0; y1 < y; y1++) {
+			for (int x1 = 0; x1 < x; x1++) {
+				cells[y1][x1] = new GameCell(x1, y1);
+			}
+		}
+		gameScene.fill(cells);
+		EventListeners.initListeners(cells, gameScene);
 		window.setScene(gameScene);
 		window.sizeToScene();
 		window.centerOnScreen();
@@ -50,6 +110,32 @@ public class AppFX extends Application {
 	
 	public GameScene getGameScene() {
 		return gameScene;
+	}
+	
+	public void endGame(boolean isGameWon) {
+		String title = (isGameWon) ? "All Clear!" : "Boom";
+		String text = (isGameWon) ? "Congrats! You made it! " : "You've lost :(";
+		Stage popUpStage = new Stage();
+		popUpStage.initModality(Modality.APPLICATION_MODAL);
+		popUpStage.initStyle(StageStyle.UTILITY);
+		popUpStage.setTitle(title);
+		popUpStage.setWidth(270);
+		popUpStage.setHeight(140);
+		popUpStage.setResizable(false);
+		Label msgLabel = new Label(text);
+		msgLabel.setAlignment(Pos.CENTER);
+		msgLabel.setFont(new Font(14));
+		Label timeLabel = new Label("Time: " + " 0:00");
+		timeLabel.setTextAlignment(TextAlignment.CENTER);
+		BorderPane borderPane = new BorderPane();
+		borderPane.setTop(msgLabel);
+		borderPane.setBottom(timeLabel);
+		StackPane root = new StackPane(borderPane);
+		borderPane.setPadding(new Insets(50 ,10,50,10));
+		popUpStage.setScene(new Scene(root));
+		popUpStage.show();
+		popUpStage.centerOnScreen();
+		popUpStage.toFront();
 	}
 	
 	public static void main(String[] args) {

@@ -215,7 +215,7 @@ public class MineSweeper {
 			for (GameCell nearbyCell : row) {
 				if (nearbyCell != null && nearbyCell.isCovered()) {
 					nearbyCell.uncover();
-					if ( nearbyCell.getContent().equals("")) uncoverNearbyCells(nearbyCell);
+					if ( nearbyCell.isClear()) uncoverNearbyCells(nearbyCell);
 				}
 			}
 		}
@@ -275,7 +275,7 @@ public class MineSweeper {
 				if (cell.isNotMarked()) {
 					cell.uncover();
 					if (cell.hasMine()) endGame(false);
-					else if (cell.isEmpty()) uncoverNearbyCells(cell);
+					else if (cell.isClear()) uncoverNearbyCells(cell);
 					else if (allClear()) endGame(true);
 				}
 				break;

@@ -1,2 +1,2 @@
-start gradlew.bat run
+gradlew.bat run
 exit
