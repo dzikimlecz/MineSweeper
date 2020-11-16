@@ -40,10 +40,25 @@ public class EventListeners {
 	}
 	
 	public static void cellClicked(GameCell cell) {
-		if(!isGenerated) {
-			
+		if (!isGenerated) {
+			generateFromCell(cell);
+			uncoverNearbyCells(cell);
 		}
-	
+		switch (toggleMode) {
+			case DIG:
+				if (cell.isNotMarked()) {
+					cell.uncover();
+					if (cell.isMined()) endGame(false);
+					else if (cell.isClear()) uncoverNearbyCells(cell);
+					else if (allClear()) endGame(true);
+				}
+				break;
+			case MARK:
+				cell.setMark(cell.isNotMarked());
+				break;
+			default:
+				throw new IllegalStateException("Unexpected value: " + toggleMode);
+		}
 	}
 	
 	/**
@@ -100,7 +115,7 @@ public class EventListeners {
 	 * generates mines starting from selected cell
 	 * @param cell cell to be not surrounded by any mines
 	 */
-	public void generateFromCell(GameCell cell) {
+	public static void generateFromCell(GameCell cell) {
 		List<Dimension2D> mineCells = new ArrayList<>(minesAmount);
 		boolean invalidMine;
 		for (int i = 0; i < minesAmount; i++) {
