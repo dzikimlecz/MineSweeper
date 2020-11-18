@@ -1,8 +1,8 @@
 package me.dzikimlecz.javafx.game.Control;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 import me.dzikimlecz.javafx.AppFX;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.ToggleMode;
@@ -15,46 +15,54 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.atomic.AtomicReference;
 
-public class EventListeners {
-	
-	private EventListeners(){}
-	
-	private static EventListeners instance;
-	
-	public static EventListeners getInstance() {
-		if (instance == null) {
-			instance = new EventListeners();
-		}
-		return instance;
-	}
-	
-	private Dimension2D cellsGridSize;
+public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
+	private final Dimension2D cellsGridSize;
 	
 	private GameCell[][] cells;
 	
 	private ToggleMode toggleMode;
 	
-	private int minesAmount;
+	private final int minesAmount;
 	
 	private boolean isGenerated;
 	
-	private GameScene gameScene;
+	private final GameScene gameScene;
 	
-	public void initListeners(GameCell[][] cells, GameScene gameScene) {
+	public EventListeners(GameCell[][] cells, GameScene gameScene, GameProperties gameProperties) {
+		
 		this.cells = cells;
 		this.gameScene = gameScene;
 		isGenerated = false;
 		int y = cells.length;
 		int x = cells[0].length;
-		Difficulty difficulty = (Difficulty) GameProperties.get("difficulty");
-		minesAmount = (int)(x * y * difficulty.getMinesFactor());
+		Difficulty difficulty = (Difficulty) gameProperties.get("difficulty");
+		minesAmount = Math.round(x * y * difficulty.getMinesFactor());
 		cellsGridSize = new Dimension2D(x, y);
 	}
 	
-	public void cellClicked(GameCell cell) {
+	@Override
+	public void handle(ActionEvent event) {
+		Object sourceObj = event.getSource();
+		if (!(sourceObj instanceof Button)) throw new AssertionError(
+				"EventListeners instances may be used only with buttons"
+		);
+		Button button = (Button) sourceObj;
+		String id = button.getId();
+		if (id.equals(gameScene.getToggleButtonId()))
+			switchToggleMode();
+		else if (id.startsWith(GameCell.cellButonIdPrefix)) {
+			String coords = id.substring(GameCell.cellButonIdPrefix.length());
+			int x = Integer.parseInt(coords.substring(0, coords.indexOf(':')));
+			int y = Integer.parseInt(coords.substring(coords.indexOf(':') + 1));
+			cellClicked(cells[y][x]);
+		}
+	}
+	
+	private void cellClicked(GameCell cell) {
 		if (!isGenerated) {
 			generateFromCell(cell);
 			uncoverNearbyCells(cell);
+			gameScene.getTimer().start();
 		}
 		switch (toggleMode) {
 			case DIG:
@@ -71,27 +79,14 @@ public class EventListeners {
 			default:
 				throw new IllegalStateException("Unexpected value: " + toggleMode);
 		}
-	}
-	
-	/**
-	 *Ends game, locks the frame and shows popup about time and the result.
-	 * @param isGameWon sets result of the game and popup message
-	 */
-	public void endGame(boolean isGameWon) {
-		if(!isGameWon)
-			for (GameCell[] cellsRow : cells)
-				for (GameCell cell : cellsRow)
-					if (cell.isCovered() && !cell.isMined()) cell.uncover();
-					else if (cell.isMined()) cell.setMark(true);
-		cells = null;
-		AppFX.getInstance().endGame(isGameWon);
+		
 	}
 	
 	/**
 	 * Recursively uncovers cells surrounded by ordered empty cell
 	 * @param cell empty cell being starting point of uncovering.
 	 */
-	public void uncoverNearbyCells(GameCell cell) {
+	private void uncoverNearbyCells(GameCell cell) {
 		GameCell[][] nearbyCells = getNearbyCells(cell);
 		for (GameCell[] row : nearbyCells) {
 			for (GameCell nearbyCell : row) {
@@ -104,17 +99,7 @@ public class EventListeners {
 		if (allClear()) endGame(true);
 	}
 	
-	/**
-	 * checks if all cells are cleared
-	 * @return {@code true}, if all cells are uncovered or contain a mine, otherwise {@code false}
-	 */
-	public boolean allClear() {
-		return Arrays.stream(cells).allMatch(
-				gameCellPanels -> Arrays.stream(gameCellPanels).allMatch(
-						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.isMined()));
-	}
-	
-	public void switchToggleMode() {
+	private void switchToggleMode() {
 		Button toggleButton = gameScene.getToggleButton();
 		if (isGenerated) {
 			toggleMode = (toggleMode == ToggleMode.DIG) ? ToggleMode.MARK : ToggleMode.DIG;
@@ -127,7 +112,7 @@ public class EventListeners {
 	 * generates mines starting from selected cell
 	 * @param cell cell to be not surrounded by any mines
 	 */
-	public void generateFromCell(GameCell cell) {
+	private void generateFromCell(GameCell cell) {
 		List<Dimension2D> mineCells = new ArrayList<>(minesAmount);
 		boolean invalidMine;
 		for (int i = 0; i < minesAmount; i++) {
@@ -145,10 +130,10 @@ public class EventListeners {
 				mineLoc.set(new Dimension2D(mineLocWidth, mineLocHeight));
 				final Dimension2D loc = mineLoc.get();
 				invalidMine = mineCells.contains(loc) || loc.equals(cell.getLocation()) ||
-								Arrays.stream(getNearbyCells(cell)).anyMatch(
-										cells -> Arrays.stream(cells).anyMatch(
-												cell1 -> cell1 != null &&
-														cell1.getLocation().equals(loc)
+						Arrays.stream(getNearbyCells(cell)).anyMatch(
+								cells -> Arrays.stream(cells).anyMatch(
+										cell1 -> cell1 != null &&
+												cell1.getLocation().equals(loc)
 								));
 				
 			} while (invalidMine);
@@ -174,6 +159,31 @@ public class EventListeners {
 		}
 		toggleMode = ToggleMode.DIG;
 		isGenerated = true;
+	}
+	
+	/**
+	 * checks if all cells are cleared
+	 * @return {@code true}, if all cells are uncovered or contain a mine, otherwise {@code false}
+	 */
+	private boolean allClear() {
+		return Arrays.stream(cells).allMatch(
+				gameCellPanels -> Arrays.stream(gameCellPanels).allMatch(
+						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.isMined()));
+	}
+	
+	/**
+	 *Ends game, locks the frame and shows popup about time and the result.
+	 * @param isGameWon sets result of the game and popup message
+	 */
+	private void endGame(boolean isGameWon) {
+		gameScene.getTimer().stop();
+		if(!isGameWon)
+			for (GameCell[] cellsRow : cells)
+				for (GameCell cell : cellsRow)
+					if (cell.isCovered() && !cell.isMined()) cell.uncover();
+					else if (cell.isMined()) cell.setMark(true);
+		cells = null;
+		AppFX.getInstance().endGame(isGameWon);
 	}
 	
 	/**
@@ -207,5 +217,5 @@ public class EventListeners {
 		}
 		return nearbyCells;
 	}
-
+	
 }

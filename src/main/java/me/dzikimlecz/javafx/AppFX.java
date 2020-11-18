@@ -1,5 +1,6 @@
 package me.dzikimlecz.javafx;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -19,7 +20,6 @@ import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
 
 public class AppFX extends javafx.application.Application {
-	
 	/**
 	 * Emoji used as icon on buttons. (&#xD83D;&#xDEA9;)
 	 */
@@ -39,35 +39,38 @@ public class AppFX extends javafx.application.Application {
 		return instance;
 	}
 	
-	private GameScene gameScene;
 	private Stage window;
+	private GameProperties gameProperties;
+	private EventListeners eventListeners;
 	
 	@Override
 	public void start(Stage primaryStage) {
+		primaryStage = new Stage();
 		instance = this;
 		window = primaryStage;
+		gameProperties = new GameProperties();
 		startConfigs();
+		startGame();
 	}
 	
 	private void startConfigs() {
 		window.setTitle("Game Launcher");
-		window.setScene(new ConfigsScene());
+		window.setScene(new ConfigsScene(gameProperties, window));
 		window.setWidth(410);
 		window.setHeight(200);
 		window.setResizable(false);
-		window.show();
 		window.centerOnScreen();
 		window.toFront();
+		window.showAndWait();
 	}
 	
 	public void startGame() {
-		window.hide();
 		window.setTitle("MineSweeper");
-		gameScene = new GameScene();
+		GameScene gameScene = new GameScene();
 		
 		int x;
 		int y;
-		switch ((Difficulty) GameProperties.get("difficulty")) {
+		switch ((Difficulty) gameProperties.get("difficulty")) {
 			//case DEBUG:
 			case EASY:
 				x = 10;
@@ -87,29 +90,23 @@ public class AppFX extends javafx.application.Application {
 				break;
 			default:
 				throw new IllegalStateException(
-						"Unexpected value: " + GameProperties.get("difficulty"));
+						"Unexpected value: " + gameProperties.get("difficulty"));
 		}
 		
 		GameCell[][] cells = new GameCell[y][x];
+		eventListeners = new EventListeners(cells, gameScene, gameProperties);
+		gameScene.setEventListeners(eventListeners);
 		for (int y1 = 0; y1 < y; y1++) {
 			for (int x1 = 0; x1 < x; x1++) {
-				cells[y1][x1] = new GameCell(x1, y1);
+				cells[y1][x1] = new GameCell(x1, y1, eventListeners);
 			}
 		}
 		gameScene.fill(cells);
-		EventListeners.getInstance().initListeners(cells, gameScene);
 		window.setScene(gameScene);
 		window.sizeToScene();
 		window.centerOnScreen();
-		try {
-			Thread.sleep(200);
-		} catch (Exception ignore) {}
 		window.show();
 		window.toFront();
-	}
-	
-	public GameScene getGameScene() {
-		return gameScene;
 	}
 	
 	public void endGame(boolean isGameWon) {

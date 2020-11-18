@@ -10,6 +10,7 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import me.dzikimlecz.javafx.game.Control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.Theme;
@@ -18,12 +19,15 @@ import java.util.List;
 
 public class ConfigsScene extends Scene {
 	
-	private ComboBox<String> difficultyBox;
-	private ComboBox<String> themeBox;
+	private final ComboBox<String> difficultyBox;
+	private final ComboBox<String> themeBox;
+	private final GameProperties gameProperties;
+	private final Stage window;
 	
-	public ConfigsScene() {
+	public ConfigsScene(GameProperties gameProperties, Stage window) {
 		super(new GridPane());
-		
+		this.gameProperties = gameProperties;
+		this.window = window;
 		GridPane grid = (GridPane) this.getRoot();
 		grid.setPadding(new Insets(15, 10, 15, 10));
 		grid.setHgap(200);
@@ -102,11 +106,11 @@ public class ConfigsScene extends Scene {
 	}
 	
 	public void commit(ActionEvent event) {
-		GameProperties.register("difficulty",
+		gameProperties.register("difficulty",
 		                        Difficulty.parseDifficulty(difficultyBox.getValue()));
-		GameProperties.register("theme",
+		gameProperties.register("theme",
 		                        Theme.parseTheme(themeBox.getValue()));
-		AppFX.getInstance().startGame();
+		window.hide();
 	}
 	
 }

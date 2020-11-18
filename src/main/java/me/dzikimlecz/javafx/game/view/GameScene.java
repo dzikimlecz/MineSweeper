@@ -1,41 +1,44 @@
 package me.dzikimlecz.javafx.game.view;
 
-import javafx.geometry.Dimension2D;
-import javafx.geometry.Orientation;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import me.dzikimlecz.javafx.AppFX;
-import me.dzikimlecz.javafx.game.Control.EventListeners;
 
 public class GameScene extends Scene{
 	
-	private final BorderPane root;
+	private EventHandler<ActionEvent> eventListeners;
 	
-	private Dimension2D gridSize;
+	private final BorderPane root;
 	
 	private final Button toggleButton;
 	
+	private final GameTimer timer;
+	
 	public Button getToggleButton() {
 		return toggleButton;
+	}
+	
+	public String getToggleButtonId() {
+		return "toggle";
+	}
+	
+	public GameTimer getTimer() {
+		return timer;
 	}
 	
 	public GameScene() {
 		super(new BorderPane());
 		root = (BorderPane) this.getRoot();
 		toggleButton = new Button(AppFX.PICKAXE_EMOJI);
-	}
-	
-	public void setGridSize(int x, int y) {
-		this.gridSize = new Dimension2D(x, y);
+		toggleButton.setId(getToggleButtonId());
+		timer = new GameTimer();
 	}
 	
 	public void fill(GameCell[][] cells) {
-		gridSize = new Dimension2D(cells[0].length, cells.length);
-		
 		
 		//pane containing cells
 		GridPane gamePane = new GridPane();
@@ -51,7 +54,7 @@ public class GameScene extends Scene{
 		
 		//pane containing timer and toggle
 		BorderPane menuPane = new BorderPane();
-		toggleButton.setOnAction(event -> EventListeners.getInstance().switchToggleMode());
+		toggleButton.setOnAction(eventListeners);
 //		menuPane.getChildren().setLeft(timer);
 		menuPane.setCenter(toggleButton);
 		
@@ -60,4 +63,7 @@ public class GameScene extends Scene{
 		
 	}
 	
+	public void setEventListeners(EventHandler<ActionEvent> eventListeners) {
+		this.eventListeners = eventListeners;
+	}
 }

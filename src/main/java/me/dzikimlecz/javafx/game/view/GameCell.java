@@ -1,15 +1,17 @@
 package me.dzikimlecz.javafx.game.view;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import me.dzikimlecz.javafx.AppFX;
-import me.dzikimlecz.javafx.game.Control.EventListeners;
-import me.dzikimlecz.swing.game.control.MineSweeper;
 import org.jetbrains.annotations.Nullable;
 
 public class GameCell extends StackPane {
+	
+	public static final String cellButonIdPrefix = "cell ";
 	
 	private final Dimension2D location;
 	private final Button uncoverButton;
@@ -38,13 +40,14 @@ public class GameCell extends StackPane {
 		return content.trim().isEmpty();
 	}
 	
-	public GameCell(int x, int y) {
+	public GameCell(int x, int y, EventHandler<ActionEvent> eventListeners) {
 		super();
 		this.isCovered = true;
 		this.location = new Dimension2D(x, y);
 		this.content = null;
 		this.uncoverButton = new Button("");
-		uncoverButton.setOnAction(event -> EventListeners.getInstance().cellClicked(this));
+		uncoverButton.setId(cellButonIdPrefix + x + ':' + y);
+		uncoverButton.setOnAction(eventListeners);
 		this.setPrefSize(28, 28);
 		uncoverButton.setPrefSize(28,28);
 		this.getChildren().add(uncoverButton);
