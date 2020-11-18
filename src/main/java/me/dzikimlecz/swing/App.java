@@ -6,8 +6,6 @@ import me.dzikimlecz.swing.game.control.MineSweeper;
 
 import javax.swing.SwingUtilities;
 
-// TODO: 03.11.2020 Migrate from Swing to JavaFX. ASAP.
-// TODO: 08.11.2020 nerf Hard difficulty
 
 /**
  * Main Class, represents set up frame and starts game.

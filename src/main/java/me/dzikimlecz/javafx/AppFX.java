@@ -97,7 +97,7 @@ public class AppFX extends javafx.application.Application {
 			}
 		}
 		gameScene.fill(cells);
-		EventListeners.initListeners(cells, gameScene);
+		EventListeners.getInstance().initListeners(cells, gameScene);
 		window.setScene(gameScene);
 		window.sizeToScene();
 		window.centerOnScreen();
@@ -118,6 +118,7 @@ public class AppFX extends javafx.application.Application {
 		Stage popUpStage = new Stage();
 		popUpStage.initModality(Modality.APPLICATION_MODAL);
 		popUpStage.initStyle(StageStyle.UTILITY);
+		popUpStage.setOnCloseRequest(event -> window.close());
 		popUpStage.setTitle(title);
 		popUpStage.setWidth(270);
 		popUpStage.setHeight(140);

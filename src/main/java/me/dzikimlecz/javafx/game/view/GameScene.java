@@ -8,21 +8,24 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.GridPane;
 import me.dzikimlecz.javafx.AppFX;
-import me.dzikimlecz.swing.game.control.MineSweeper;
+import me.dzikimlecz.javafx.game.Control.EventListeners;
 
 public class GameScene extends Scene{
 	
-	private final FlowPane root;
+	private final BorderPane root;
 	
 	private Dimension2D gridSize;
 	
-	private ToggleButton toggleButton;
+	private final ToggleButton toggleButton;
 	
+	public ToggleButton getToggleButton() {
+		return toggleButton;
+	}
 	
 	public GameScene() {
-		super(new FlowPane());
-		root = (FlowPane) this.getRoot();
-		
+		super(new BorderPane());
+		root = (BorderPane) this.getRoot();
+		toggleButton = new ToggleButton(AppFX.PICKAXE_EMOJI);
 	}
 	
 	public void setGridSize(int x, int y) {
@@ -47,15 +50,12 @@ public class GameScene extends Scene{
 		
 		//pane containing timer and toggle
 		BorderPane menuPane = new BorderPane();
-		
-		toggleButton = new ToggleButton(AppFX.PICKAXE_EMOJI);
-		toggleButton.setOnAction(event -> System.out.println());
+		toggleButton.setOnAction(event -> EventListeners.getInstance().switchToggleMode());
 //		menuPane.getChildren().setLeft(timer);
-		menuPane.setRight(toggleButton);
+		menuPane.setCenter(toggleButton);
 		
-		root.setOrientation(Orientation.VERTICAL);
-		root.getChildren().addAll(gamePane, menuPane);
-		
+		root.setTop(menuPane);
+		root.setBottom(gamePane);
 		
 	}
 	

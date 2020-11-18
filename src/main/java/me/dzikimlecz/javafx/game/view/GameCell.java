@@ -4,6 +4,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
+import me.dzikimlecz.javafx.AppFX;
 import me.dzikimlecz.javafx.game.Control.EventListeners;
 import me.dzikimlecz.swing.game.control.MineSweeper;
 import org.jetbrains.annotations.Nullable;
@@ -34,7 +35,7 @@ public class GameCell extends StackPane {
 	}
 	
 	public boolean isClear() {
-		return content.isEmpty();
+		return content.trim().isEmpty();
 	}
 	
 	public GameCell(int x, int y) {
@@ -42,14 +43,16 @@ public class GameCell extends StackPane {
 		this.isCovered = true;
 		this.location = new Dimension2D(x, y);
 		this.content = null;
-		this.uncoverButton = new Button();
-		uncoverButton.setOnAction(event -> EventListeners.cellClicked(this));
+		this.uncoverButton = new Button("");
+		uncoverButton.setOnAction(event -> EventListeners.getInstance().cellClicked(this));
+		this.setPrefSize(28, 28);
+		uncoverButton.setPrefSize(28,28);
 		this.getChildren().add(uncoverButton);
 	}
 	
 	public void fill(boolean isMined, @Nullable String content) {
 		this.isMined = isMined;
-		this.content = (content != null) ? content : "";
+		this.content = (content != null) ? content : (isMined) ? AppFX.BOMB_EMOJI : "";
 	}
 	
 	public void uncover() {
@@ -62,7 +65,7 @@ public class GameCell extends StackPane {
 	
 	public void setMark(boolean marked) {
 		isMarked = marked;
-		uncoverButton.setText((isMarked) ? null : "     ");
+		uncoverButton.setText((isMarked) ? AppFX.FLAG_EMOJI : "");
 	}
 	
 }

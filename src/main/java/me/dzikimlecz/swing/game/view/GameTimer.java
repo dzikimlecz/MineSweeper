@@ -6,8 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * JLabel subclass representing a Stopper counting minutes and seconds in separate thread
  */
-public class GameTimer extends JLabel implements Cloneable{
-	// TODO: 04.11.2020 change from thread to timer
+public class GameTimer extends JLabel {
 	
 	private byte seconds;
 	private byte minutes;

@@ -16,21 +16,32 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class EventListeners {
 	
-	private static Dimension2D cellsGridSize;
+	private EventListeners(){}
 	
-	private static GameCell[][] cells;
+	private static EventListeners instance;
 	
-	private static ToggleMode toggleMode;
+	public static EventListeners getInstance() {
+		if (instance == null) {
+			instance = new EventListeners();
+		}
+		return instance;
+	}
 	
-	private static int minesAmount;
+	private Dimension2D cellsGridSize;
 	
-	private static boolean isGenerated;
+	private GameCell[][] cells;
 	
-	private static GameScene gameScene;
+	private ToggleMode toggleMode;
 	
-	public static void initListeners(GameCell[][] cells, GameScene gameScene) {
-		EventListeners.cells = cells;
-		EventListeners.gameScene = gameScene;
+	private int minesAmount;
+	
+	private boolean isGenerated;
+	
+	private GameScene gameScene;
+	
+	public void initListeners(GameCell[][] cells, GameScene gameScene) {
+		this.cells = cells;
+		this.gameScene = gameScene;
 		isGenerated = false;
 		int y = cells.length;
 		int x = cells[0].length;
@@ -39,7 +50,7 @@ public class EventListeners {
 		cellsGridSize = new Dimension2D(x, y);
 	}
 	
-	public static void cellClicked(GameCell cell) {
+	public void cellClicked(GameCell cell) {
 		if (!isGenerated) {
 			generateFromCell(cell);
 			uncoverNearbyCells(cell);
@@ -65,7 +76,7 @@ public class EventListeners {
 	 *Ends game, locks the frame and shows popup about time and the result.
 	 * @param isGameWon sets result of the game and popup message
 	 */
-	public static void endGame(boolean isGameWon) {
+	public void endGame(boolean isGameWon) {
 		if(!isGameWon)
 			for (GameCell[] cellsRow : cells)
 				for (GameCell cell : cellsRow)
@@ -77,7 +88,7 @@ public class EventListeners {
 	 * Recursively uncovers cells surrounded by ordered empty cell
 	 * @param cell empty cell being starting point of uncovering.
 	 */
-	public static void uncoverNearbyCells(GameCell cell) {
+	public void uncoverNearbyCells(GameCell cell) {
 		GameCell[][] nearbyCells = getNearbyCells(cell);
 		for (GameCell[] row : nearbyCells) {
 			for (GameCell nearbyCell : row) {
@@ -94,15 +105,14 @@ public class EventListeners {
 	 * checks if all cells are cleared
 	 * @return {@code true}, if all cells are uncovered or contain a mine, otherwise {@code false}
 	 */
-	public static boolean allClear() {
+	public boolean allClear() {
 		return Arrays.stream(cells).allMatch(
 				gameCellPanels -> Arrays.stream(gameCellPanels).allMatch(
 						gameCellPanel -> !gameCellPanel.isCovered() || gameCellPanel.isMined()));
 	}
 	
-	public static void switchToggleMode() {
-		ToggleButton toggleButton = null;
-		assert toggleButton != null;
+	public void switchToggleMode() {
+		ToggleButton toggleButton = gameScene.getToggleButton();
 		if (isGenerated) {
 			toggleMode = (toggleMode == ToggleMode.DIG) ? ToggleMode.MARK : ToggleMode.DIG;
 			toggleButton.setText((toggleMode == ToggleMode.DIG) ? AppFX.PICKAXE_EMOJI :
@@ -115,7 +125,7 @@ public class EventListeners {
 	 * generates mines starting from selected cell
 	 * @param cell cell to be not surrounded by any mines
 	 */
-	public static void generateFromCell(GameCell cell) {
+	public void generateFromCell(GameCell cell) {
 		List<Dimension2D> mineCells = new ArrayList<>(minesAmount);
 		boolean invalidMine;
 		for (int i = 0; i < minesAmount; i++) {
@@ -152,7 +162,7 @@ public class EventListeners {
 					int nearbyMines = 0;
 					for(GameCell[] row : getNearbyCells(cell1))
 						for(GameCell cell2 : row)
-							if (mineCells.contains(cell2.getLocation()))
+							if (cell2 != null && mineCells.contains(cell2.getLocation()))
 								nearbyMines++;
 					content = (nearbyMines != 0) ? String.valueOf(nearbyMines) : null;
 				}
@@ -171,7 +181,7 @@ public class EventListeners {
 	 * border, non existing surroundings will be represented as {@code null} reference. Cell used as
 	 * argument is also represented as {@code null} reference.
 	 */
-	private static GameCell[][] getNearbyCells(GameCell cell) {
+	private GameCell[][] getNearbyCells(GameCell cell) {
 		int x = (int) cell.getLocation().getWidth();
 		int y = (int) cell.getLocation().getHeight();
 		GameCell[][] nearbyCells = new GameCell[3][3];
