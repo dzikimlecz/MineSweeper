@@ -3,6 +3,7 @@ package me.dzikimlecz.javafx.game.view;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Orientation;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
@@ -16,16 +17,16 @@ public class GameScene extends Scene{
 	
 	private Dimension2D gridSize;
 	
-	private final ToggleButton toggleButton;
+	private final Button toggleButton;
 	
-	public ToggleButton getToggleButton() {
+	public Button getToggleButton() {
 		return toggleButton;
 	}
 	
 	public GameScene() {
 		super(new BorderPane());
 		root = (BorderPane) this.getRoot();
-		toggleButton = new ToggleButton(AppFX.PICKAXE_EMOJI);
+		toggleButton = new Button(AppFX.PICKAXE_EMOJI);
 	}
 	
 	public void setGridSize(int x, int y) {

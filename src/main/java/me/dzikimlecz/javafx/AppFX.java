@@ -55,8 +55,8 @@ public class AppFX extends javafx.application.Application {
 		window.setWidth(410);
 		window.setHeight(200);
 		window.setResizable(false);
-		window.centerOnScreen();
 		window.show();
+		window.centerOnScreen();
 		window.toFront();
 	}
 	
@@ -115,9 +115,8 @@ public class AppFX extends javafx.application.Application {
 	public void endGame(boolean isGameWon) {
 		String title = (isGameWon) ? "All Clear!" : "Boom";
 		String text = (isGameWon) ? "Congrats! You made it! " : "You've lost :(";
-		Stage popUpStage = new Stage();
+		Stage popUpStage = new Stage(StageStyle.UTILITY);
 		popUpStage.initModality(Modality.APPLICATION_MODAL);
-		popUpStage.initStyle(StageStyle.UTILITY);
 		popUpStage.setOnCloseRequest(event -> window.close());
 		popUpStage.setTitle(title);
 		popUpStage.setWidth(270);
@@ -137,6 +136,7 @@ public class AppFX extends javafx.application.Application {
 		popUpStage.show();
 		popUpStage.centerOnScreen();
 		popUpStage.toFront();
+		System.gc();
 	}
 	
 	public static void main(String[] args) {

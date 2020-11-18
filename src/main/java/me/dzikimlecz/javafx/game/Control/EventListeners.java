@@ -1,6 +1,7 @@
 package me.dzikimlecz.javafx.game.Control;
 
 import javafx.geometry.Dimension2D;
+import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import me.dzikimlecz.javafx.AppFX;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
@@ -80,7 +81,9 @@ public class EventListeners {
 		if(!isGameWon)
 			for (GameCell[] cellsRow : cells)
 				for (GameCell cell : cellsRow)
-					if (cell.isMined()) cell.uncover();
+					if (cell.isCovered() && !cell.isMined()) cell.uncover();
+					else if (cell.isMined()) cell.setMark(true);
+		cells = null;
 		AppFX.getInstance().endGame(isGameWon);
 	}
 	
@@ -112,13 +115,12 @@ public class EventListeners {
 	}
 	
 	public void switchToggleMode() {
-		ToggleButton toggleButton = gameScene.getToggleButton();
+		Button toggleButton = gameScene.getToggleButton();
 		if (isGenerated) {
 			toggleMode = (toggleMode == ToggleMode.DIG) ? ToggleMode.MARK : ToggleMode.DIG;
 			toggleButton.setText((toggleMode == ToggleMode.DIG) ? AppFX.PICKAXE_EMOJI :
 					                     AppFX.FLAG_EMOJI);
 		}
-		else toggleButton.setSelected(false);
 	}
 	
 	/**
