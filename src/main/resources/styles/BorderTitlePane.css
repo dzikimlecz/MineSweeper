@@ -8,7 +8,7 @@
 .border-title-pane {
     -fx-content-display: top;
     -fx-border-insets: 10;
-    -fx-background-color: #f8f8f8;
+    -fx-background-color: linear-gradient(to bottom right, #f8f8f8 80%, lightcyan);
     -fx-border-color: #83c5be;
     -fx-border-width: 0.75px;
     -fx-border-radius: 5;

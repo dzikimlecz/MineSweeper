@@ -86,36 +86,36 @@ public class ConfigsScene extends Scene {
 	}
 	
 	
-	public static void setFontSize(ComboBox<String> comboBox, double size) {
-		class ComboBoxCell extends ListCell<String> {
-			private final Text text;
-		ComboBoxCell() {
-			setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-			text = new Text();
-			text.setFont(Font.font(size));
-		}
-		@Override
-		protected void updateItem(String item, boolean empty) {
-			super.updateItem(item, empty);
-			if (item == null || empty) {
-				setGraphic(null);
-			} else {
-				text.setText(item);
-				
-				setGraphic(text);
-			}
-		}
-	}
-		comboBox.setButtonCell(new ComboBoxCell());
-		comboBox.setCellFactory(param -> new ComboBoxCell());
-	}
-	
 	public void commit() {
 		gameProperties.register("difficulty",
 		                        Difficulty.parseDifficulty(difficultyBox.getValue()));
 		gameProperties.register("theme",
 		                        Theme.parseTheme(themeBox.getValue()));
 		window.hide();
+	}
+	
+	public static void setFontSize(ComboBox<String> comboBox, double size) {
+		class ComboBoxCell extends ListCell<String> {
+			private final Text text;
+			ComboBoxCell() {
+				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+				text = new Text();
+				text.setFont(Font.font(size));
+			}
+			@Override
+			protected void updateItem(String item, boolean empty) {
+				super.updateItem(item, empty);
+				if (item == null || empty) {
+					setGraphic(null);
+				} else {
+					text.setText(item);
+					
+					setGraphic(text);
+				}
+			}
+		}
+		comboBox.setButtonCell(new ComboBoxCell());
+		comboBox.setCellFactory(param -> new ComboBoxCell());
 	}
 	
 }

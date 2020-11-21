@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Font;
@@ -16,6 +17,8 @@ import me.dzikimlecz.javafx.game.Control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
+
+import javax.swing.text.html.ImageView;
 
 public class AppFX extends javafx.application.Application {
 	/**
@@ -45,6 +48,7 @@ public class AppFX extends javafx.application.Application {
 		primaryStage = new Stage();
 		instance = this;
 		window = primaryStage;
+		window.getIcons().add(new Image("bomb.png"));
 		gameProperties = new GameProperties();
 		startConfigs();
 		if (gameProperties.isEmpty()) return;
