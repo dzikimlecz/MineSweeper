@@ -21,5 +21,7 @@ public class GameProperties {
 		return gameProperties.get(key);
 	}
 	
-	
+	public boolean isEmpty() {
+		return gameProperties.isEmpty();
+	}
 }

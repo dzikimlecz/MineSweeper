@@ -1,0 +1,29 @@
+#configGrid {
+    -fx-padding: 10;
+    -fx-vgap: 20;
+}
+
+.configPane {
+    -fx-vgap: 7;
+}
+
+.configButton, .configLabel {
+    -fx-font-size: 14;
+}
+
+.configBox {
+    -fx-translate-y: 2;
+    -fx-translate-x: 2;
+}
+
+.configBox:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
+
+.configButton:focused {
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; 
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}

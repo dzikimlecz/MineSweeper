@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id 'application'
-    id 'org.openjfx.javafxplugin' version '0.0.9'
 }
 
 group 'me.dzikimlecz'
@@ -12,13 +11,8 @@ targetCompatibility = JavaVersion.VERSION_1_8
 
 jar {
     manifest {
-        attributes "Main-Class": "me.dzikimlecz.javafx.AppFX"
+        attributes "Main-Class": "main.Main"
     }
-}
-
-javafx {
-    version = "15.0.1"
-    modules = [ 'javafx.controls' ]
 }
 
 sourceSets {
@@ -29,7 +23,7 @@ sourceSets {
     })
 }
 
-mainClassName = 'me.dzikimlecz.javafx.AppFX'
+mainClassName = 'main.Main'
 
 
 repositories {

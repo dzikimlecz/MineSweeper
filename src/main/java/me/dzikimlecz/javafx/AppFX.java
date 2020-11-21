@@ -1,6 +1,5 @@
 package me.dzikimlecz.javafx;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -12,7 +11,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
 import me.dzikimlecz.javafx.game.Control.EventListeners;
 import me.dzikimlecz.javafx.game.Control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
@@ -41,7 +39,6 @@ public class AppFX extends javafx.application.Application {
 	
 	private Stage window;
 	private GameProperties gameProperties;
-	private EventListeners eventListeners;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -50,14 +47,15 @@ public class AppFX extends javafx.application.Application {
 		window = primaryStage;
 		gameProperties = new GameProperties();
 		startConfigs();
+		if (gameProperties.isEmpty()) return;
 		startGame();
 	}
 	
 	private void startConfigs() {
 		window.setTitle("Game Launcher");
 		window.setScene(new ConfigsScene(gameProperties, window));
-		window.setWidth(410);
-		window.setHeight(200);
+		window.setWidth(420);
+		window.setHeight(210);
 		window.setResizable(false);
 		window.centerOnScreen();
 		window.toFront();
@@ -94,7 +92,7 @@ public class AppFX extends javafx.application.Application {
 		}
 		
 		GameCell[][] cells = new GameCell[y][x];
-		eventListeners = new EventListeners(cells, gameScene, gameProperties);
+		EventListeners eventListeners = new EventListeners(cells, gameScene, gameProperties);
 		gameScene.setEventListeners(eventListeners);
 		for (int y1 = 0; y1 < y; y1++) {
 			for (int x1 = 0; x1 < x; x1++) {
@@ -134,9 +132,5 @@ public class AppFX extends javafx.application.Application {
 		popUpStage.centerOnScreen();
 		popUpStage.toFront();
 		System.gc();
-	}
-	
-	public static void main(String[] args) {
-		launch();
 	}
 }
