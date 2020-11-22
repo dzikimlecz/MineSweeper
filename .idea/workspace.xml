@@ -20,14 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2cf0936a-9b4c-4dc1-94e7-a75eebf042ae" name="Default Changelist" comment="Replaced Singleton pattern in EventListeners with Dependency injection.&#10;&#10;Added constructor parameter or setter depending on the needs &#10;Introduced method handle in EventListeners due to implementation of EventHandler interface.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/AppFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/AppFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/ConfigsScene.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/ConfigsScene.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/components/BorderTitlePane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/components/BorderTitlePane.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/game/Control/EventListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/game/control/EventListeners.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/game/Control/GameProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/me/dzikimlecz/javafx/game/control/GameProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/BorderTitlePane.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/BorderTitlePane.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/styles/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles/configstyles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +85,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_MARK_IGNORED_FILES_AS_EXCLUDED" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="JAVA&#10;HgIgnore" />
@@ -271,13 +265,13 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.Main" />
       <item itemvalue="Application.AppFX" />
       <item itemvalue="Java Scratch.Scratch" />
       <item itemvalue="Java Scratch.Scratch (1)" />
       <item itemvalue="Java Scratch.Scratch (2)" />
       <item itemvalue="Java Scratch.Scratch (3)" />
       <item itemvalue="Shell Script.Start.bat AppFX" />
-      <item itemvalue="Application.Main" />
     </list>
     <recent_temporary>
       <list>
