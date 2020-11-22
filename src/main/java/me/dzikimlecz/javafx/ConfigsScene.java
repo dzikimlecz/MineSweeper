@@ -1,6 +1,5 @@
 package me.dzikimlecz.javafx;
 
-import javafx.geometry.Orientation;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -10,7 +9,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import me.dzikimlecz.javafx.components.BorderTitlePane;
-import me.dzikimlecz.javafx.game.Control.GameProperties;
+import me.dzikimlecz.javafx.game.control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.Theme;
 
@@ -82,7 +81,7 @@ public class ConfigsScene extends Scene {
 		gridChildren.add(themePane);
 		gridChildren.add(proceedPane);
 		
-		getStylesheets().add("styles/styles.css");
+		getStylesheets().add("styles/configstyles.css");
 	}
 	
 	

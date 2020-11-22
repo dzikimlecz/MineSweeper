@@ -12,13 +12,11 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import me.dzikimlecz.javafx.game.Control.EventListeners;
-import me.dzikimlecz.javafx.game.Control.GameProperties;
+import me.dzikimlecz.javafx.game.control.EventListeners;
+import me.dzikimlecz.javafx.game.control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
-
-import javax.swing.text.html.ImageView;
 
 public class AppFX extends javafx.application.Application {
 	/**

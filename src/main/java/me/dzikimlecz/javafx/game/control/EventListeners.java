@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.Control;
+package me.dzikimlecz.javafx.game.control;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Dimension2D;
@@ -180,8 +180,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		if(!isGameWon)
 			for (GameCell[] cellsRow : cells)
 				for (GameCell cell : cellsRow)
-					if (cell.isCovered() && !cell.isMined()) cell.uncover();
-					else if (cell.isMined()) cell.setMark(true);
+					if (cell.isCovered() && cell.isMined()) cell.setMark(true);
 		cells = null;
 		AppFX.getInstance().endGame(isGameWon);
 	}

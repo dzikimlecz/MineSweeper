@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.Control;
+package me.dzikimlecz.javafx.game.control;
 
 import org.jetbrains.annotations.NotNull;
 

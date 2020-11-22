@@ -22,7 +22,6 @@ public class BorderTitlePane extends StackPane {
 		
 		this.getStyleClass().add("border-title-pane");
 		this.getChildren().addAll(titleLabel, contentPane);
-		this.getStylesheets().add("styles/BorderTitlePane.css");
 	}
 	
 	public void add(Node node) {
