@@ -28,9 +28,9 @@ public enum Difficulty implements Parsable {
 			case MEDIUM:
 				return 0.2f;
 			case HARD:
-				return 0.3f;
+				return 0.25f;
 			case EXTREME:
-				return 0.4f;
+				return 0.3f;
 			default:
 				throw new IllegalStateException("Unexpected value: " + this);
 		}
