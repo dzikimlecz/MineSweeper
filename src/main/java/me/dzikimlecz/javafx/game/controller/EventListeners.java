@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.control;
+package me.dzikimlecz.javafx.game.controller;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Dimension2D;
@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import me.dzikimlecz.javafx.AppFX;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.ToggleMode;
+import me.dzikimlecz.javafx.game.model.GameConfigs;
 import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
 
@@ -24,18 +25,23 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 	
 	private final int minesAmount;
 	
+	private final GameConfigs gameConfigs;
+	
 	private boolean isGenerated;
 	
 	private final GameScene gameScene;
 	
-	public EventListeners(GameCell[][] cells, GameScene gameScene, GameProperties gameProperties) {
+	public EventListeners(GameCell[][] cells, GameScene gameScene, GameConfigs gameConfigs) {
 		
 		this.cells = cells;
 		this.gameScene = gameScene;
 		isGenerated = false;
 		int y = cells.length;
 		int x = cells[0].length;
-		Difficulty difficulty = (Difficulty) gameProperties.get("difficulty");
+		
+		this.gameConfigs = gameConfigs;
+		
+		Difficulty difficulty = (Difficulty) gameConfigs.get("difficulty");
 		minesAmount = Math.round(x * y * difficulty.getMinesFactor());
 		cellsGridSize = new Dimension2D(x, y);
 	}
@@ -48,7 +54,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		);
 		Button button = (Button) sourceObj;
 		String id = button.getId();
-		if (id.equals(gameScene.getToggleButtonId()))
+		if (id.equals(gameScene.toggleButtonId()))
 			switchToggleMode();
 		else if (id.startsWith(GameCell.cellButonIdPrefix)) {
 			String coords = id.substring(GameCell.cellButonIdPrefix.length());
@@ -159,6 +165,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		}
 		toggleMode = ToggleMode.DIG;
 		isGenerated = true;
+		gameScene.getStylesheets().add(gameConfigs.getCSS());
 	}
 	
 	/**

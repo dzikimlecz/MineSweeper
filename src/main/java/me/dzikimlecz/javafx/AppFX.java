@@ -12,8 +12,8 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import me.dzikimlecz.javafx.game.control.EventListeners;
-import me.dzikimlecz.javafx.game.control.GameProperties;
+import me.dzikimlecz.javafx.game.controller.EventListeners;
+import me.dzikimlecz.javafx.game.model.GameConfigs;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.view.GameCell;
 import me.dzikimlecz.javafx.game.view.GameScene;
@@ -39,23 +39,23 @@ public class AppFX extends javafx.application.Application {
 	}
 	
 	private Stage window;
-	private GameProperties gameProperties;
+	private GameConfigs gameConfigs;
 	
 	@Override
 	public void start(Stage primaryStage) {
 		primaryStage = new Stage();
 		instance = this;
 		window = primaryStage;
-		window.getIcons().add(new Image("bomb.png"));
-		gameProperties = new GameProperties();
+		window.getIcons().add(new Image("bomb-icon.png"));
+		gameConfigs = new GameConfigs();
 		startConfigs();
-		if (gameProperties.isEmpty()) return;
+		if (gameConfigs.isEmpty()) return;
 		startGame();
 	}
 	
 	private void startConfigs() {
 		window.setTitle("Game Launcher");
-		window.setScene(new ConfigsScene(gameProperties, window));
+		window.setScene(new ConfigsScene(gameConfigs, window));
 		window.setWidth(420);
 		window.setHeight(210);
 		window.setResizable(false);
@@ -70,7 +70,7 @@ public class AppFX extends javafx.application.Application {
 		
 		int x;
 		int y;
-		switch ((Difficulty) gameProperties.get("difficulty")) {
+		switch ((Difficulty) gameConfigs.get("difficulty")) {
 			//case DEBUG:
 			case EASY:
 				x = 10;
@@ -90,11 +90,11 @@ public class AppFX extends javafx.application.Application {
 				break;
 			default:
 				throw new IllegalStateException(
-						"Unexpected value: " + gameProperties.get("difficulty"));
+						"Unexpected value: " + gameConfigs.get("difficulty"));
 		}
 		
 		GameCell[][] cells = new GameCell[y][x];
-		EventListeners eventListeners = new EventListeners(cells, gameScene, gameProperties);
+		EventListeners eventListeners = new EventListeners(cells, gameScene, gameConfigs);
 		gameScene.setEventListeners(eventListeners);
 		for (int y1 = 0; y1 < y; y1++) {
 			for (int x1 = 0; x1 < x; x1++) {

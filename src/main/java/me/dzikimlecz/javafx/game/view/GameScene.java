@@ -7,12 +7,15 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import me.dzikimlecz.javafx.AppFX;
+import me.dzikimlecz.javafx.components.BorderTitlePane;
 
 public class GameScene extends Scene{
 	
 	private EventHandler<ActionEvent> eventListeners;
 	
-	private final BorderPane root;
+	private final BorderTitlePane root;
+	
+	private final BorderPane borderPane;
 	
 	private final Button toggleButton;
 	
@@ -22,7 +25,7 @@ public class GameScene extends Scene{
 		return toggleButton;
 	}
 	
-	public String getToggleButtonId() {
+	public static String toggleButtonId() {
 		return "toggle";
 	}
 	
@@ -31,10 +34,11 @@ public class GameScene extends Scene{
 	}
 	
 	public GameScene() {
-		super(new BorderPane());
-		root = (BorderPane) this.getRoot();
+		super(new BorderTitlePane());
+		root = (BorderTitlePane) this.getRoot();
+		borderPane = new BorderPane();
 		toggleButton = new Button(AppFX.PICKAXE_EMOJI);
-		toggleButton.setId(getToggleButtonId());
+		toggleButton.setId(toggleButtonId());
 		timer = new GameTimer();
 	}
 	
@@ -58,12 +62,15 @@ public class GameScene extends Scene{
 //		menuPane.getChildren().setLeft(timer);
 		menuPane.setCenter(toggleButton);
 		
-		root.setTop(menuPane);
-		root.setBottom(gamePane);
-		
+		borderPane.setTop(menuPane);
+		borderPane.setBottom(gamePane);
 	}
 	
 	public void setEventListeners(EventHandler<ActionEvent> eventListeners) {
 		this.eventListeners = eventListeners;
+	}
+	
+	public void setTitle(String title) {
+		root.setTitle(title);
 	}
 }

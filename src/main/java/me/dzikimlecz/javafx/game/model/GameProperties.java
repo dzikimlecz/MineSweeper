@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.control;
+package me.dzikimlecz.javafx.game.model;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -12,7 +12,7 @@ public class GameProperties {
 		this.gameProperties = new HashMap<>();
 	}
 	
-	public void register(String key, @NotNull Object object) {
+	public void register(@NotNull String key, @NotNull Object object) {
 		gameProperties.putIfAbsent(key.toLowerCase(), object);
 	}
 	

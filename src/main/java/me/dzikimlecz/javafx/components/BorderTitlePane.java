@@ -11,6 +11,11 @@ public class BorderTitlePane extends StackPane {
 	Label titleLabel;
 	StackPane contentPane;
 	
+	
+	public BorderTitlePane() {
+		this("");
+	}
+	
 	public BorderTitlePane(String title) {
 		
 		titleLabel = new Label(' ' + title + ' ');

@@ -9,9 +9,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import me.dzikimlecz.javafx.components.BorderTitlePane;
-import me.dzikimlecz.javafx.game.control.GameProperties;
 import me.dzikimlecz.javafx.game.enums.Difficulty;
 import me.dzikimlecz.javafx.game.enums.Theme;
+import me.dzikimlecz.javafx.game.model.GameConfigs;
 
 import java.util.List;
 
@@ -19,17 +19,17 @@ public class ConfigsScene extends Scene {
 	
 	private final ComboBox<String> difficultyBox;
 	private final ComboBox<String> themeBox;
-	private final GameProperties gameProperties;
+	private final GameConfigs gameConfigs;
 	private final Stage window;
 	
-	public ConfigsScene(GameProperties gameProperties, Stage window) {
+	public ConfigsScene(GameConfigs gameConfigs, Stage window) {
 		super(new BorderTitlePane("MineSweeper"));
 		
 		GridPane grid;
 		((BorderTitlePane) this.getRoot()).add(grid = new GridPane());
 		grid.setId("configGrid");
 		
-		this.gameProperties = gameProperties;
+		this.gameConfigs = gameConfigs;
 		this.window = window;
 		List<javafx.scene.Node> gridChildren = grid.getChildren();
 		
@@ -86,10 +86,10 @@ public class ConfigsScene extends Scene {
 	
 	
 	public void commit() {
-		gameProperties.register("difficulty",
-		                        Difficulty.parseDifficulty(difficultyBox.getValue()));
-		gameProperties.register("theme",
-		                        Theme.parseTheme(themeBox.getValue()));
+		gameConfigs.register("difficulty",
+		                     Difficulty.parseDifficulty(difficultyBox.getValue()));
+		gameConfigs.register("theme",
+		                     Theme.parseTheme(themeBox.getValue()));
 		window.hide();
 	}
 	
