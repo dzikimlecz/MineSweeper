@@ -1,5 +1,4 @@
 # MineSweeper
-Classic Mine Sweeper<br>
 This is a classic minesweeper we all know from old versions of Windows, with refreshed graphics
 .<br> 
 Created using JavaFx but on the branch <code>swing</code> there is discontinued version created in Swing. (looks more old-fashioned)<br> 
