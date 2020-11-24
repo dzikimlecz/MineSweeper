@@ -1,35 +1,35 @@
 .border-title-pane-label {
-    -fx-background-color: #212529;
-    -fx-text-fill: #F8F9FA;
+    -fx-background-color: #F3D3CE;
+    -fx-text-fill: #04080F;
 }
 
 .border-title-pane {
-    -fx-background-color: #212529;
-    -fx-border-color: #DEE2E6;
+    -fx-background-color: #F3D3CE;
+    -fx-border-color: #EEEBD0;
 }
 
 .border-title-pane-content {
-    -fx-text-fill: #F8F9FA;
+    -fx-text-fill: #04080F;
 }
 
 .cell-label {
-    -fx-text-fill: #F8F9FA;
+    -fx-text-fill: #04080F;
 }
 
 .cell-button {
-    -fx-background-color: #343A40;
-    -fx-border-color: #F8F9FA;
-    -fx-text-fill: #659157;
+    -fx-background-color: #E8A79C;
+    -fx-border-color: #EEEBD0;
+    -fx-text-fill: #EEEBD0;
 }
 
 .cell-button:pressed {
-    -fx-background-color: #343A40;
+    -fx-background-color: #E8A79C;
 }
 
 .cell-button:focused {
-    -fx-background-color: #343A40;
+    -fx-background-color: #E8A79C;
 }
 
 .game-grid{
-    -fx-border-color: #495057;
+    -fx-border-color: #EEEBD0;
 }
