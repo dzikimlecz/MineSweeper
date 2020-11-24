@@ -189,8 +189,8 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		if(!isGameWon)
 			for (GameCell[] cellsRow : cells)
 				for (GameCell cell : cellsRow)
-					if (cell.isCovered() && cell.isMined()) cell.setMark(true);
-		cells = null;
+					if (!(cell.isMined() || cell.isNotMarked())) cell.setMark(false);
+					else if (cell.isMined() && cell.isNotMarked()) cell.setMark(true);
 		AppFX.getInstance().endGame(isGameWon);
 	}
 	
