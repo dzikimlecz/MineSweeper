@@ -81,7 +81,7 @@ public class ConfigsScene extends Scene {
 		gridChildren.add(themePane);
 		gridChildren.add(proceedPane);
 		
-		getStylesheets().add("styles/configstyles.css");
+		getStylesheets().addAll("styles/config-styles.css", "styles/BorderTitlePane.css");
 	}
 	
 	

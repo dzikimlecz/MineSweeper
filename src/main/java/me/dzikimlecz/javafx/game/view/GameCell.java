@@ -11,15 +11,30 @@ import org.jetbrains.annotations.Nullable;
 
 public class GameCell extends StackPane {
 	
-	public static final String cellButonIdPrefix = "cell ";
+	///////////////////////////////////////////////////////////////////////////
+	// Static constants
+	///////////////////////////////////////////////////////////////////////////
+	public static final String cellButonIdPrefix = "cell-button ";
+	private static final int cellSize = 30;
 	
-	private final Dimension2D location;
+	///////////////////////////////////////////////////////////////////////////
+	// Components
+	///////////////////////////////////////////////////////////////////////////
 	private final Button uncoverButton;
+	private final Label label;
+	
+	///////////////////////////////////////////////////////////////////////////
+	// properties
+	///////////////////////////////////////////////////////////////////////////
+	private final Dimension2D location;
 	private String content;
 	private boolean isMined;
 	private boolean isCovered;
 	private boolean isMarked;
 	
+	///////////////////////////////////////////////////////////////////////////
+	//properties getters
+	///////////////////////////////////////////////////////////////////////////
 	public Dimension2D getLocation() {
 		return location;
 	}
@@ -40,16 +55,20 @@ public class GameCell extends StackPane {
 		return content.trim().isEmpty();
 	}
 	
+	
 	public GameCell(int x, int y, EventHandler<ActionEvent> eventListeners) {
 		super();
 		this.isCovered = true;
 		this.location = new Dimension2D(x, y);
-		this.content = null;
 		this.uncoverButton = new Button("");
+		this.label = new Label();
+		label.getStyleClass().add("cell-label");
+		uncoverButton.getStyleClass().add(cellButonIdPrefix.trim());
 		uncoverButton.setId(cellButonIdPrefix + x + ':' + y);
 		uncoverButton.setOnAction(eventListeners);
-		this.setPrefSize(28, 28);
-		uncoverButton.setPrefSize(28,28);
+		
+		this.setPrefSize(cellSize, cellSize);
+		uncoverButton.setPrefSize(cellSize, cellSize);
 		this.getChildren().add(uncoverButton);
 	}
 	
@@ -62,7 +81,9 @@ public class GameCell extends StackPane {
 		if (content == null)
 			throw new IllegalStateException("Tried to uncover not-filled GamePanel");
 		this.getChildren().remove(uncoverButton);
-		this.getChildren().add(new Label(content));
+		label.setText(content);
+		if(!this.getChildren().contains(label))
+			this.getChildren().add(label);
 		this.isCovered = false;
 	}
 	

@@ -101,7 +101,8 @@ public class AppFX extends javafx.application.Application {
 				cells[y1][x1] = new GameCell(x1, y1, eventListeners);
 			}
 		}
-		gameScene.fill(cells);
+		
+		gameScene.fill(cells, gameConfigs.getCSS());
 		window.setScene(gameScene);
 		window.sizeToScene();
 		window.centerOnScreen();

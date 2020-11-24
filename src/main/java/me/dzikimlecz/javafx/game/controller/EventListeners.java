@@ -25,7 +25,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 	
 	private final int minesAmount;
 	
-	private final GameConfigs gameConfigs;
+	private int flags;
 	
 	private boolean isGenerated;
 	
@@ -39,11 +39,11 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		int y = cells.length;
 		int x = cells[0].length;
 		
-		this.gameConfigs = gameConfigs;
-		
-		Difficulty difficulty = (Difficulty) gameConfigs.get("difficulty");
+		Difficulty difficulty = gameConfigs.getDifficulty();
 		minesAmount = Math.round(x * y * difficulty.getMinesFactor());
+		this.gameScene.setTitle("Mines left: " + minesAmount);
 		cellsGridSize = new Dimension2D(x, y);
+		flags = 0;
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		);
 		Button button = (Button) sourceObj;
 		String id = button.getId();
-		if (id.equals(gameScene.toggleButtonId()))
+		if (id.equals(GameScene.toggleButtonId()))
 			switchToggleMode();
 		else if (id.startsWith(GameCell.cellButonIdPrefix)) {
 			String coords = id.substring(GameCell.cellButonIdPrefix.length());
@@ -70,9 +70,10 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 			uncoverNearbyCells(cell);
 			gameScene.getTimer().start();
 		}
+		boolean notMarked = cell.isNotMarked();
 		switch (toggleMode) {
 			case DIG:
-				if (cell.isNotMarked()) {
+				if (notMarked) {
 					cell.uncover();
 					if (cell.isMined()) endGame(false);
 					else if (cell.isClear()) uncoverNearbyCells(cell);
@@ -80,7 +81,9 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 				}
 				break;
 			case MARK:
-				cell.setMark(cell.isNotMarked());
+				flags += notMarked ? 1 : -1;
+				cell.setMark(notMarked);
+				gameScene.setTitle("Mines left: " + (minesAmount - flags));
 				break;
 			default:
 				throw new IllegalStateException("Unexpected value: " + toggleMode);
@@ -165,7 +168,6 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		}
 		toggleMode = ToggleMode.DIG;
 		isGenerated = true;
-		gameScene.getStylesheets().add(gameConfigs.getCSS());
 	}
 	
 	/**

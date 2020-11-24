@@ -15,7 +15,7 @@ public class GameScene extends Scene{
 	
 	private final BorderTitlePane root;
 	
-	private final BorderPane borderPane;
+	private final BorderPane innerPane;
 	
 	private final Button toggleButton;
 	
@@ -36,17 +36,18 @@ public class GameScene extends Scene{
 	public GameScene() {
 		super(new BorderTitlePane());
 		root = (BorderTitlePane) this.getRoot();
-		borderPane = new BorderPane();
+		innerPane = new BorderPane();
+		root.add(innerPane);
 		toggleButton = new Button(AppFX.PICKAXE_EMOJI);
 		toggleButton.setId(toggleButtonId());
 		timer = new GameTimer();
 	}
 	
-	public void fill(GameCell[][] cells) {
+	public void fill(GameCell[][] cells, String css) {
 		
 		//pane containing cells
 		GridPane gamePane = new GridPane();
-		gamePane.setGridLinesVisible(true);
+		gamePane.getStyleClass().add("game-grid");
 		for (int y = 0, cellsLength = cells.length; y < cellsLength; y++) {
 			GameCell[] cellsRow = cells[y];
 			for (int x = 0, cellsRowLength = cellsRow.length; x < cellsRowLength; x++) {
@@ -62,8 +63,12 @@ public class GameScene extends Scene{
 //		menuPane.getChildren().setLeft(timer);
 		menuPane.setCenter(toggleButton);
 		
-		borderPane.setTop(menuPane);
-		borderPane.setBottom(gamePane);
+		innerPane.setTop(menuPane);
+		innerPane.setBottom(gamePane);
+		
+		this.getStylesheets().addAll("styles/BorderTitlePane.css",
+		                             "styles/game-style.css",
+		                             css);
 	}
 	
 	public void setEventListeners(EventHandler<ActionEvent> eventListeners) {

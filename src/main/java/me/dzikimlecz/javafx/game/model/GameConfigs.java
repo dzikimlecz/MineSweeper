@@ -47,6 +47,10 @@ public class GameConfigs {
 		return value;
 	}
 	
+	public Difficulty getDifficulty() {
+		return (Difficulty) get("difficulty");
+	}
+	
 	public boolean isEmpty() {
 		return gameProperties.isEmpty();
 	}

@@ -1,5 +1,5 @@
 .border-title-pane-label {
-    -fx-background-color: #f8f8f8;
+   
     -fx-translate-y: -10;
     -fx-translate-x: 10;
     -fx-font-size: 13;
@@ -7,13 +7,8 @@
 
 .border-title-pane {
     -fx-content-display: top;
-    -fx-border-insets: 10;
-    -fx-background-color: #f8f8f8;
-    -fx-border-color: #83c5be;
     -fx-border-width: 0.75px;
     -fx-border-radius: 5;
 }
 
-.border-title-pane-content {
-    -fx-padding: 26 15 15 15;
-}
+
