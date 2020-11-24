@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.enums;
+package me.dzikimlecz.game.enums;
 
 /**
  * Interface used to parse an enum value to readable string.

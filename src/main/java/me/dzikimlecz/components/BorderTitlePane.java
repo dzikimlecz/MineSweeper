@@ -1,6 +1,5 @@
-package me.dzikimlecz.javafx.components;
+package me.dzikimlecz.components;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;

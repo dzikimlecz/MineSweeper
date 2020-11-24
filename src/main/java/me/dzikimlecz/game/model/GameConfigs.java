@@ -1,7 +1,7 @@
-package me.dzikimlecz.javafx.game.model;
+package me.dzikimlecz.game.model;
 
-import me.dzikimlecz.javafx.game.enums.Difficulty;
-import me.dzikimlecz.javafx.game.enums.Theme;
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.enums.Theme;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;

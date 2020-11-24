@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.view;
+package me.dzikimlecz.game.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,7 +6,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
-import me.dzikimlecz.javafx.AppFX;
+import me.dzikimlecz.App;
 import org.jetbrains.annotations.Nullable;
 
 public class GameCell extends StackPane {
@@ -74,7 +74,7 @@ public class GameCell extends StackPane {
 	
 	public void fill(boolean isMined, @Nullable String content) {
 		this.isMined = isMined;
-		this.content = (content != null) ? content : (isMined) ? AppFX.BOMB_EMOJI : "";
+		this.content = (content != null) ? content : (isMined) ? App.BOMB_EMOJI : "";
 	}
 	
 	public void uncover() {
@@ -89,7 +89,7 @@ public class GameCell extends StackPane {
 	
 	public void setMark(boolean marked) {
 		isMarked = marked;
-		uncoverButton.setText((isMarked) ? AppFX.FLAG_EMOJI : "");
+		uncoverButton.setText((isMarked) ? App.FLAG_EMOJI : "");
 	}
 	
 }

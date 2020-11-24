@@ -1,14 +1,14 @@
-package me.dzikimlecz.javafx.game.controller;
+package me.dzikimlecz.game.controller;
 
 import javafx.event.ActionEvent;
 import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
-import me.dzikimlecz.javafx.AppFX;
-import me.dzikimlecz.javafx.game.enums.Difficulty;
-import me.dzikimlecz.javafx.game.enums.ToggleMode;
-import me.dzikimlecz.javafx.game.model.GameConfigs;
-import me.dzikimlecz.javafx.game.view.GameCell;
-import me.dzikimlecz.javafx.game.view.GameScene;
+import me.dzikimlecz.App;
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.enums.ToggleMode;
+import me.dzikimlecz.game.model.GameConfigs;
+import me.dzikimlecz.game.view.GameCell;
+import me.dzikimlecz.game.view.GameScene;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,8 +112,8 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		Button toggleButton = gameScene.getToggleButton();
 		if (isGenerated) {
 			toggleMode = (toggleMode == ToggleMode.DIG) ? ToggleMode.MARK : ToggleMode.DIG;
-			toggleButton.setText((toggleMode == ToggleMode.DIG) ? AppFX.PICKAXE_EMOJI :
-					                     AppFX.FLAG_EMOJI);
+			toggleButton.setText((toggleMode == ToggleMode.DIG) ? App.PICKAXE_EMOJI :
+					                     App.FLAG_EMOJI);
 		}
 	}
 	
@@ -191,7 +191,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 				for (GameCell cell : cellsRow)
 					if (!(cell.isMined() || cell.isNotMarked())) cell.setMark(false);
 					else if (cell.isMined() && cell.isNotMarked()) cell.setMark(true);
-		AppFX.getInstance().endGame(isGameWon);
+		App.getInstance().endGame(isGameWon);
 	}
 	
 	/**

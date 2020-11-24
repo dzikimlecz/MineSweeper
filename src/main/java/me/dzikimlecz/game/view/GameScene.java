@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.view;
+package me.dzikimlecz.game.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,8 +6,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import me.dzikimlecz.javafx.AppFX;
-import me.dzikimlecz.javafx.components.BorderTitlePane;
+import me.dzikimlecz.App;
+import me.dzikimlecz.components.BorderTitlePane;
 
 public class GameScene extends Scene{
 	
@@ -38,7 +38,7 @@ public class GameScene extends Scene{
 		root = (BorderTitlePane) this.getRoot();
 		innerPane = new BorderPane();
 		root.add(innerPane);
-		toggleButton = new Button(AppFX.PICKAXE_EMOJI);
+		toggleButton = new Button(App.PICKAXE_EMOJI);
 		toggleButton.setId(toggleButtonId());
 		timer = new GameTimer();
 	}

@@ -1,6 +1,5 @@
-package me.dzikimlecz.javafx.game.view;
+package me.dzikimlecz.game.view;
 
-import javafx.application.Platform;
 import javafx.scene.control.Label;
 
 import java.util.concurrent.atomic.AtomicBoolean;

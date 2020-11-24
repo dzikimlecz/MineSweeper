@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx.game.enums;
+package me.dzikimlecz.game.enums;
 
 /**
  * Enum representing mode of the cells' buttons.

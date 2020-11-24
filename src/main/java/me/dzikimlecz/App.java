@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx;
+package me.dzikimlecz;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,13 +12,13 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import me.dzikimlecz.javafx.game.controller.EventListeners;
-import me.dzikimlecz.javafx.game.model.GameConfigs;
-import me.dzikimlecz.javafx.game.enums.Difficulty;
-import me.dzikimlecz.javafx.game.view.GameCell;
-import me.dzikimlecz.javafx.game.view.GameScene;
+import me.dzikimlecz.game.controller.EventListeners;
+import me.dzikimlecz.game.model.GameConfigs;
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.view.GameCell;
+import me.dzikimlecz.game.view.GameScene;
 
-public class AppFX extends javafx.application.Application {
+public class App extends javafx.application.Application {
 	/**
 	 * Emoji used as icon on buttons. (&#xD83D;&#xDEA9;)
 	 */
@@ -32,9 +32,9 @@ public class AppFX extends javafx.application.Application {
 	 */
 	public static final String BOMB_EMOJI = "\uD83D\uDCA3";
 	
-	private static AppFX instance;
+	private static App instance;
 	
-	public static AppFX getInstance() {
+	public static App getInstance() {
 		return instance;
 	}
 	

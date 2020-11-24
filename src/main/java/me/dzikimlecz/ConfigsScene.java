@@ -1,4 +1,4 @@
-package me.dzikimlecz.javafx;
+package me.dzikimlecz;
 
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -8,10 +8,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import me.dzikimlecz.javafx.components.BorderTitlePane;
-import me.dzikimlecz.javafx.game.enums.Difficulty;
-import me.dzikimlecz.javafx.game.enums.Theme;
-import me.dzikimlecz.javafx.game.model.GameConfigs;
+import me.dzikimlecz.components.BorderTitlePane;
+import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.enums.Theme;
+import me.dzikimlecz.game.model.GameConfigs;
 
 import java.util.List;
 
