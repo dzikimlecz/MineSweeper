@@ -16,7 +16,7 @@
     -fx-text-fill: #04080F;
 }
 
-.cell-button {
+.cell-button, #toggle {
     -fx-background-color: #E8A79C;
     -fx-border-color: #EEEBD0;
     -fx-text-fill: #EEEBD0;
@@ -32,4 +32,9 @@
 
 .game-grid{
     -fx-border-color: #EEEBD0;
+}
+
+#toggle:focused {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
 }

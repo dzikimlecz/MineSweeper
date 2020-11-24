@@ -6,10 +6,8 @@
     -fx-border-insets: 10;
 }
 
-#toggle:focused {
-    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color; 
-    -fx-background-insets: 0, 1, 2;
-    -fx-background-radius: 5, 4, 3;
+#toggle {
+    -fx-border-radius: 5, 4, 3;
 }
 
 .cell {
