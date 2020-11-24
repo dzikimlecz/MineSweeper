@@ -114,7 +114,8 @@ public class AppFX extends javafx.application.Application {
 		String title = (isGameWon) ? "All Clear!" : "Boom";
 		String text = (isGameWon) ? "Congrats! You made it! " : "You've lost :(";
 		Stage popUpStage = new Stage(StageStyle.UTILITY);
-		popUpStage.initModality(Modality.APPLICATION_MODAL);
+		popUpStage.initOwner(window);
+		popUpStage.initModality(Modality.WINDOW_MODAL);
 		popUpStage.setOnCloseRequest(event -> window.close());
 		popUpStage.setTitle(title);
 		popUpStage.setWidth(270);
