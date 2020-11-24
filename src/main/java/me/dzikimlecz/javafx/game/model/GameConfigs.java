@@ -57,7 +57,7 @@ public class GameConfigs {
 	
 	private static class CSSLoader {
 		static String load(Theme theme) {
-			return "styles/themes/" + theme.parseString() + ".css";
+			return "styles/themes/" + theme.parseString().replaceAll("\\s", "-") + ".css";
 		}
 	}
 	
