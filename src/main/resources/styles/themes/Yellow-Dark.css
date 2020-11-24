@@ -1,0 +1,40 @@
+.border-title-pane-label {
+    -fx-background-color: #202020;
+    -fx-text-fill: #FFD100;
+}
+
+.border-title-pane {
+    -fx-background-color: #202020;
+    -fx-border-color: #FFEE32;
+}
+
+.border-title-pane-content {
+    -fx-text-fill: #FFD100;
+}
+
+.cell-label {
+    -fx-text-fill: #FFD100;
+}
+
+.cell-button, #toggle {
+    -fx-background-color: #202020;
+    -fx-border-color: #FFD100;
+    -fx-text-fill: #FFEE32;
+}
+
+.cell-button:pressed {
+    -fx-background-color: #202020;
+}
+
+.cell-button:focused {
+    -fx-background-color: #202020;
+}
+
+.game-grid{
+    -fx-border-color: #FFEE32;
+}
+
+#toggle:focused {
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
+}
