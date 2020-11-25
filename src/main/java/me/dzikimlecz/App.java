@@ -86,8 +86,8 @@ public class App extends javafx.application.Application {
 				y = 30;
 				break;
 			case EXTREME:
-				x = 40;
-				y = 35;
+				x = 44;
+				y = 33;
 				break;
 			default:
 				throw new IllegalStateException(
