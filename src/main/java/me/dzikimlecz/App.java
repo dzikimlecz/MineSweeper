@@ -13,8 +13,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import me.dzikimlecz.game.controller.EventListeners;
-import me.dzikimlecz.game.model.GameConfigs;
 import me.dzikimlecz.game.enums.Difficulty;
+import me.dzikimlecz.game.model.GameConfigs;
 import me.dzikimlecz.game.view.GameCell;
 import me.dzikimlecz.game.view.GameScene;
 
@@ -136,5 +136,37 @@ public class App extends javafx.application.Application {
 		popUpStage.centerOnScreen();
 		popUpStage.toFront();
 		System.gc();
+	}
+	
+	
+	public static void applicationError(Exception e) {
+		javax.swing.SwingUtilities.invokeLater(() -> {
+			javax.swing.JFrame frame = new javax.swing.JFrame();
+			frame.setTitle("Application Error");
+			frame.setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+			javax.swing.JPanel panel = new javax.swing.JPanel();
+			panel.setLayout(new java.awt.BorderLayout());
+			String msgLine1;
+			String msgLine2;
+			if (e instanceof ClassNotFoundException) {
+				msgLine1 = "Application could not be started. Please ensure, that";
+				msgLine2 = "you are starting it using JRE 1.8, or JDK not newer than JDK 10";
+			} else {
+				StringBuilder builder = new StringBuilder(e.getClass().toString());
+				builder.replace(0, builder.indexOf(" "), "Error: ");
+				msgLine1 = builder.toString();
+				msgLine2 = e.getMessage();
+			}
+			
+			panel.add(new javax.swing.JLabel(msgLine1, javax.swing.JLabel.CENTER), "North" );
+			panel.add(new javax.swing.JLabel(msgLine2, javax.swing.JLabel.CENTER), "South" );
+			frame.getContentPane().add(panel);
+			frame.pack();
+			frame.setSize(frame.getWidth() + 15, frame.getHeight() + 2);
+			frame.setResizable(false);
+			frame.setLocationRelativeTo(null);
+			frame.toFront();
+			frame.setVisible(true);
+		});
 	}
 }
