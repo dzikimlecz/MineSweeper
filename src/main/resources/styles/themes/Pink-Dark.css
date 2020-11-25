@@ -1,6 +1,5 @@
 .border-title-pane-label {
     -fx-background-color: #000000;
-    -fx-text-fill: #DA4167;
 }
 
 .border-title-pane {
@@ -8,26 +7,21 @@
     -fx-border-color: #DA4167;
 }
 
-.border-title-pane-content {
+.border-title-pane-content, 
+.cell-label, 
+.border-title-pane-label, 
+.timer,
+.cell-button, 
+#toggle {
     -fx-text-fill: #DA4167;
 }
 
-.cell-label {
-    -fx-text-fill: #DA4167;
-}
-
-.cell-button, #toggle {
+.cell-button, 
+#toggle, 
+.cell-button:pressed, 
+.cell-button:focused{
     -fx-background-color: #3D2645;
     -fx-border-color: #DA4167;
-    -fx-text-fill: #DA4167;
-}
-
-.cell-button:pressed {
-    -fx-background-color: #3D2645;
-}
-
-.cell-button:focused {
-    -fx-background-color: #3D2645;
 }
 
 .game-grid{

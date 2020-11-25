@@ -1,6 +1,5 @@
 .border-title-pane-label {
     -fx-background-color: #F3D3CE;
-    -fx-text-fill: #04080F;
 }
 
 .border-title-pane {
@@ -8,29 +7,23 @@
     -fx-border-color: #EEEBD0;
 }
 
-.border-title-pane-content {
+.border-title-pane-content, 
+.cell-label, 
+.border-title-pane-label, 
+.timer {
     -fx-text-fill: #04080F;
 }
 
-.cell-label {
-    -fx-text-fill: #04080F;
-}
-
-.cell-button, #toggle {
+.cell-button, 
+#toggle, 
+.cell-button:pressed, 
+.cell-button:focused  {
     -fx-background-color: #E8A79C;
     -fx-border-color: #EEEBD0;
     -fx-text-fill: #EEEBD0;
 }
 
-.cell-button:pressed {
-    -fx-background-color: #E8A79C;
-}
-
-.cell-button:focused {
-    -fx-background-color: #E8A79C;
-}
-
-.game-grid{
+.game-grid {
     -fx-border-color: #EEEBD0;
 }
 
