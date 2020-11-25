@@ -1,5 +1,6 @@
 package me.dzikimlecz;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -70,7 +71,7 @@ public class App extends javafx.application.Application {
 		
 		int x;
 		int y;
-		switch ((Difficulty) gameConfigs.get("difficulty")) {
+		switch (gameConfigs.getDifficulty()) {
 			//case DEBUG:
 			case EASY:
 				x = 10;
@@ -90,7 +91,7 @@ public class App extends javafx.application.Application {
 				break;
 			default:
 				throw new IllegalStateException(
-						"Unexpected value: " + gameConfigs.get("difficulty"));
+						"Unexpected value: " + gameConfigs.getDifficulty());
 		}
 		
 		GameCell[][] cells = new GameCell[y][x];
@@ -105,9 +106,9 @@ public class App extends javafx.application.Application {
 		gameScene.fill(cells, gameConfigs.getCSS());
 		window.setScene(gameScene);
 		window.sizeToScene();
-		window.centerOnScreen();
 		window.show();
 		window.toFront();
+		window.centerOnScreen();
 	}
 	
 	public void endGame(boolean isGameWon) {
