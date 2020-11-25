@@ -1,65 +1,83 @@
 package me.dzikimlecz.game.view;
 
+import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.control.Label;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Label representing a Stopper counting minutes and seconds in separate thread
  */
 public class GameTimer extends Label {
 	
-	private byte seconds;
-	private byte minutes;
+	private final Timer stopper;
+	private final AtomicInteger seconds;
+	private final AtomicInteger minutes;
 	
 	/**
-	 * The Thread in which Stopper is running
+	 * Every second increments seconds and repaints. Every 60s increments minutes
 	 */
-	private final Runnable stopper;
+	private static class StopperTask extends TimerTask {
+		private final GameTimer parent;
+		
+		public StopperTask(GameTimer parent) {
+			this.parent = parent;
+		}
+		
+		@Override
+		public void run() {
+			if(parent.seconds.incrementAndGet() == 60) {
+				parent.seconds.set(0);
+				parent.minutes.incrementAndGet();
+			}
+			Platform.runLater(parent::repaint);
+		}
+	}
+	
 	/**
 	 * Condition required by stopper to run.
 	 * If it's value is false, stopper stops itself
 	 */
-	private final AtomicBoolean isRunning = new AtomicBoolean(true);
+	private boolean isRunning = false;
 	
 	/**
 	 * Creates new GameTimer instance
 	 */
 	public GameTimer() {
-		super("  0:00");
-		seconds = 0;
-		minutes = 0;
-		// Every 1000ms increments seconds and repaints. Every 60s increments minutes
-		stopper = () -> {
-			while (isRunning.get()) {
-				try {
-					Thread.sleep(1000);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-				if(isRunning.get() && ++seconds == 60) {
-					seconds = 0;
-					minutes++;
-				}
-				repaint();
-			}
-		};
-		
+		super(" 0:00");
+		seconds = new AtomicInteger(0);
+		minutes = new AtomicInteger(0);
+		stopper = new Timer("StopperD", true);
+		this.getStyleClass().add("timer");
 	}
 	
 	/**
 	 * Starts measuring the time.
 	 */
-	public synchronized void start() {
-		//Platform.runLater(stopper);
+	public void start() {
+		if (isRunning)
+			throw new IllegalStateException("Tried to start already running Stopper instance");
+		isRunning = true;
+		stopper.scheduleAtFixedRate(new StopperTask(this), 500, 1000);
 	}
 	
 	/**
 	 * Stops measuring the time.
 	 */
-	public synchronized void stop() {
-		isRunning.set(false);
+	public void stop() {
+		if (!isRunning)
+			throw new IllegalStateException("Tried to stop not started Stopper instance");
+		stopper.cancel();
+		isRunning = false;
 		repaint();
+	}
+	
+	public void reset() {
+		seconds.set(0);
+		minutes.set(0);
 	}
 	
 	/**
@@ -75,6 +93,6 @@ public class GameTimer extends Label {
 	 */
 	@Override
 	public String toString() {
-		return String.format("%2d:%02d", minutes, seconds);
+		return String.format("%2d:%02d", minutes.get(), seconds.get());
 	}
 }

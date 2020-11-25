@@ -60,7 +60,7 @@ public class GameScene extends Scene{
 		//pane containing timer and toggle
 		BorderPane menuPane = new BorderPane();
 		toggleButton.setOnAction(eventListeners);
-//		menuPane.getChildren().setLeft(timer);
+		menuPane.setLeft(timer);
 		menuPane.setCenter(toggleButton);
 		
 		innerPane.setTop(menuPane);

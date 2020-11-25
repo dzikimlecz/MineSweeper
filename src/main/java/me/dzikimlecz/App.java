@@ -1,6 +1,5 @@
 package me.dzikimlecz;
 
-import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import me.dzikimlecz.game.controller.EventListeners;
-import me.dzikimlecz.game.enums.Difficulty;
 import me.dzikimlecz.game.model.GameConfigs;
 import me.dzikimlecz.game.view.GameCell;
 import me.dzikimlecz.game.view.GameScene;
@@ -112,8 +110,10 @@ public class App extends javafx.application.Application {
 	}
 	
 	public void endGame(boolean isGameWon) {
+		
 		String title = (isGameWon) ? "All Clear!" : "Boom";
 		String text = (isGameWon) ? "Congrats! You made it! " : "You've lost :(";
+		
 		Stage popUpStage = new Stage(StageStyle.UTILITY);
 		popUpStage.initOwner(window);
 		popUpStage.initModality(Modality.WINDOW_MODAL);
@@ -122,11 +122,15 @@ public class App extends javafx.application.Application {
 		popUpStage.setWidth(270);
 		popUpStage.setHeight(140);
 		popUpStage.setResizable(false);
+		
 		Label msgLabel = new Label(text);
 		msgLabel.setAlignment(Pos.CENTER);
 		msgLabel.setFont(new Font(14));
-		Label timeLabel = new Label("Time: " + " 0:00");
+		
+		String time = ((GameScene) window.getScene()).getTimer().toString();
+		Label timeLabel = new Label("Time: " + time);
 		timeLabel.setTextAlignment(TextAlignment.CENTER);
+		
 		BorderPane borderPane = new BorderPane();
 		borderPane.setTop(msgLabel);
 		borderPane.setBottom(timeLabel);
