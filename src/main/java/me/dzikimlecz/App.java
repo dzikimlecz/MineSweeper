@@ -55,8 +55,6 @@ public class App extends javafx.application.Application {
 	private void startConfigs() {
 		window.setTitle("Game Launcher");
 		window.setScene(new ConfigsScene(gameConfigs, window));
-		window.setWidth(420);
-		window.setHeight(210);
 		window.setResizable(false);
 		window.centerOnScreen();
 		window.toFront();
@@ -66,7 +64,6 @@ public class App extends javafx.application.Application {
 	public void startGame() {
 		window.setTitle("MineSweeper");
 		GameScene gameScene = new GameScene();
-		
 		int x;
 		int y;
 		switch (gameConfigs.getDifficulty()) {
