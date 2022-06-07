@@ -14,7 +14,7 @@ public class GameCell extends StackPane {
 	///////////////////////////////////////////////////////////////////////////
 	// Static constants
 	///////////////////////////////////////////////////////////////////////////
-	public static final String cellButonIdPrefix = "cell-button ";
+	public static final String cellButtonIdPrefix = "cell-button ";
 	private static final int cellSize = 40;
 	
 	///////////////////////////////////////////////////////////////////////////
@@ -63,8 +63,8 @@ public class GameCell extends StackPane {
 		this.uncoverButton = new Button("");
 		this.label = new Label();
 		label.getStyleClass().add("cell-label");
-		uncoverButton.getStyleClass().add(cellButonIdPrefix.trim());
-		uncoverButton.setId(cellButonIdPrefix + x + ':' + y);
+		uncoverButton.getStyleClass().add(cellButtonIdPrefix.trim());
+		uncoverButton.setId(cellButtonIdPrefix + x + ':' + y);
 		uncoverButton.setOnMouseClicked(event ->
 			eventListeners.cellClicked(y, x, event.getButton().equals(MouseButton.SECONDARY))
 		);
