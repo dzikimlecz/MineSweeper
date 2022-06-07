@@ -11,5 +11,8 @@ public enum ToggleMode implements Parsable {
 	/**
 	 * marks a cell as mined.
 	 */
-	MARK
+	MARK;
+	public ToggleMode anotherOne() {
+		return (this == DIG) ? MARK : DIG;
+	}
 }
