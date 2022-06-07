@@ -19,7 +19,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 	private final Dimension2D cellsGridSize;
 	
-	private GameCell[][] cells;
+	private final GameCell[][] cells;
 	
 	private ToggleMode toggleMode;
 	
@@ -56,12 +56,6 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 		String id = button.getId();
 		if (id.equals(GameScene.toggleButtonId()))
 			switchToggleMode();
-		else if (id.startsWith(GameCell.cellButonIdPrefix)) {
-			String coords = id.substring(GameCell.cellButonIdPrefix.length());
-			int x = Integer.parseInt(coords.substring(0, coords.indexOf(':')));
-			int y = Integer.parseInt(coords.substring(coords.indexOf(':') + 1));
-			cellClicked(cells[y][x]);
-		}
 	}
 	public void cellClicked(int y, int x, boolean isClickSecondary) {
 		cellClicked(cells[y][x],isClickSecondary);
@@ -115,7 +109,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 	private void switchToggleMode() {
 		Button toggleButton = gameScene.getToggleButton();
 		if (isGenerated) {
-			toggleMode = (toggleMode == ToggleMode.DIG) ? ToggleMode.MARK : ToggleMode.DIG;
+			toggleMode = toggleMode.anotherOne();
 			toggleButton.setText((toggleMode == ToggleMode.DIG) ? App.PICKAXE_EMOJI :
 					                     App.FLAG_EMOJI);
 		}
