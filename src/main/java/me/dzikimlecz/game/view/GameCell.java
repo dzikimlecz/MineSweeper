@@ -1,12 +1,12 @@
 package me.dzikimlecz.game.view;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Dimension2D;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.StackPane;
 import me.dzikimlecz.App;
+import me.dzikimlecz.game.controller.EventListeners;
 import org.jetbrains.annotations.Nullable;
 
 public class GameCell extends StackPane {
@@ -15,7 +15,7 @@ public class GameCell extends StackPane {
 	// Static constants
 	///////////////////////////////////////////////////////////////////////////
 	public static final String cellButonIdPrefix = "cell-button ";
-	private static final int cellSize = 30;
+	private static final int cellSize = 40;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Components
@@ -56,7 +56,7 @@ public class GameCell extends StackPane {
 	}
 	
 	
-	public GameCell(int x, int y, EventHandler<ActionEvent> eventListeners) {
+	public GameCell(int x, int y, EventListeners eventListeners) {
 		super();
 		this.isCovered = true;
 		this.location = new Dimension2D(x, y);
@@ -65,8 +65,9 @@ public class GameCell extends StackPane {
 		label.getStyleClass().add("cell-label");
 		uncoverButton.getStyleClass().add(cellButonIdPrefix.trim());
 		uncoverButton.setId(cellButonIdPrefix + x + ':' + y);
-		uncoverButton.setOnAction(eventListeners);
-		
+		uncoverButton.setOnMouseClicked(event ->
+			eventListeners.cellClicked(y, x, event.getButton().equals(MouseButton.SECONDARY))
+		);
 		this.setPrefSize(cellSize, cellSize);
 		uncoverButton.setPrefSize(cellSize, cellSize);
 		this.getChildren().add(uncoverButton);
