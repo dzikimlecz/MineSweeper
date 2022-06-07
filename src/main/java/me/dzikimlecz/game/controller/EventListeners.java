@@ -63,15 +63,19 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 			cellClicked(cells[y][x]);
 		}
 	}
+	public void cellClicked(int y, int x, boolean isClickSecondary) {
+		cellClicked(cells[y][x],isClickSecondary);
+	}
 	
-	private void cellClicked(GameCell cell) {
+	private void cellClicked(GameCell cell, boolean isClickSecondary) {
 		if (!isGenerated) {
 			generateFromCell(cell);
 			uncoverNearbyCells(cell);
 			gameScene.getTimer().start();
 		}
 		boolean notMarked = cell.isNotMarked();
-		switch (toggleMode) {
+		ToggleMode mode = isClickSecondary ? toggleMode.anotherOne() : toggleMode;
+		switch (mode) {
 			case DIG:
 				if (notMarked) {
 					cell.uncover();
@@ -86,7 +90,7 @@ public class EventListeners implements javafx.event.EventHandler<ActionEvent> {
 				gameScene.setTitle("Mines left: " + (minesAmount - flags));
 				break;
 			default:
-				throw new IllegalStateException("Unexpected value: " + toggleMode);
+				throw new IllegalStateException("Unexpected value: " + mode);
 		}
 		
 	}
