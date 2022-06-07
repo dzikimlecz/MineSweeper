@@ -19,9 +19,9 @@ import me.dzikimlecz.game.view.GameScene;
 
 public class App extends javafx.application.Application {
 	/**
-	 * Emoji used as icon on buttons. (&#xD83D;&#xDEA9;)
+	 * Emoji used as icon on buttons. (&#x2611;&#xFE0F;)
 	 */
-	public static final String FLAG_EMOJI = "\uD83D\uDEA9";
+	public static final String FLAG_EMOJI = "\u2611\uFE0F";
 	/**
 	 * Emoji used as icon on {@code toggleMode} button. (&#x26CF;)
 	 */
